@@ -44,4 +44,4 @@ const createUser = () =>
   });
 
 const usersArea = Array.from({length: 25},createUser);
-console.log(usersArea);
+// console.log(usersArea);
