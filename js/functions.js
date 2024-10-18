@@ -16,7 +16,7 @@ uploadFile.onclick = function (evt) {
     }
   });
 };
-overlayCloseButton.onclick = function (evt) {
+overlayCloseButton.onclick = function () {
   uploadOverlay.classList.add('hidden');
 };
 
