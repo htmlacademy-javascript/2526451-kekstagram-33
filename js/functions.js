@@ -1,23 +1,25 @@
 const uploadFile = document.querySelector('.img-upload__input');
 const uploadOverlay = document.querySelector('.img-upload__overlay');
 const overlayCloseButton = document.querySelector('.img-upload__cancel');
-
-// const windowCloseEvent = function(evt) {
-// };
+const bodyArray = document.getElementsByTagName('body');
+const [body] = bodyArray;
 
 uploadFile.onclick = function (evt) {
   evt.preventDefault();
   uploadOverlay.classList.remove('hidden');
+  body.classList.add('modal-open');
   // document.addEventListener('keydown', windowCloseEvent);
   document.addEventListener('keydown', (e)=> {
     if (e.keyCode === 27) {
       uploadOverlay.classList.add('hidden');
-      // return;
+      body.classList.remove('modal-open');
     }
+    // body.style.backgroundColor = 'white';
   });
 };
 overlayCloseButton.onclick = function () {
   uploadOverlay.classList.add('hidden');
+  body.classList.remove('modal-open');
 };
 
 

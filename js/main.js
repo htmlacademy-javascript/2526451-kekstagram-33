@@ -43,5 +43,6 @@ const createUser = () =>
     comments: getCommentsArray(),
   });
 
-const usersArea = Array.from({length: 25},createUser);
-console.log(usersArea);
+const usersArray = Array.from({length: 25},createUser);
+// console.log(usersArea);
+
