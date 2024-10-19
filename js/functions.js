@@ -1,42 +1,26 @@
-const uploadFile = document.querySelector('.img-upload__input');
-const uploadOverlay = document.querySelector('.img-upload__overlay');
-const overlayCloseButton = document.querySelector('.img-upload__cancel');
-const bodyArray = document.getElementsByTagName('body');
-const [body] = bodyArray;
+const timeToJob = (dayStart, dayEnd, meetingStart, meetingTimeMin) => {
+  const toMinutes = [dayStart.split(':'),dayEnd.split(':'),meetingStart.split(':')];
+  const minutesVal = [];
+  for (let i = 0; i < toMinutes.length; i++) {
+    let minutes = Number((toMinutes[i])[0]) * 60;
+    minutes = minutes + Number((toMinutes[i])[1]);
+    minutesVal.push(minutes);
+  }
+  const dayStartInMinutes = minutesVal[0];
+  const dayEndInMinutes = minutesVal[1];
+  const meetingStartInMinutes = minutesVal[2];
 
-uploadFile.onclick = function (evt) {
-  evt.preventDefault();
-  uploadOverlay.classList.remove('hidden');
-  body.classList.add('modal-open');
-  // document.addEventListener('keydown', windowCloseEvent);
-  document.addEventListener('keydown', (e)=> {
-    if (e.keyCode === 27) {
-      uploadOverlay.classList.add('hidden');
-      body.classList.remove('modal-open');
-    }
-    // body.style.backgroundColor = 'white';
-  });
+  const meetTime = minutesVal[2] + meetingTimeMin;
+
+  if (meetTime > dayEndInMinutes || meetingStartInMinutes < dayStartInMinutes) {
+    return false;
+  }
+  return true;
 };
-overlayCloseButton.onclick = function () {
-  uploadOverlay.classList.add('hidden');
-  body.classList.remove('modal-open');
-};
-
-
-// };
-/*
-
-1. Загрузка нового изображения на сайт и заполнение информации о нём
-1.1. Загрузка нового изображения:
-
-выбор файла с изображением для загрузки;
-изменение масштаба изображения;
-применение одного из заранее заготовленных эффектов;
-выбор глубины эффекта с помощью ползунка;
-добавление текстового комментария;
-добавление хэштегов.
-1.2. Выбор изображения для загрузки осуществляется с помощью стандартного контрола загрузки файла .img-upload__input, который стилизован под букву «О» в логотипе. После выбора изображения (изменения значения поля .img-upload__input), показывается форма редактирования изображения. У элемента .img-upload__overlay удаляется класс hidden, а body задаётся класс modal-open.
-
-После выбора изображения пользователем с помощью стандартного контрола загрузки файла .img-upload__input, нужно подставить его в форму редактирования вместо тестового изображения в блок предварительного просмотра и в превью эффектов.
-
-1.3 Закрытие формы редактирования изображения производится либо нажатием на кнопку .img-upload__cancel, либо нажатием клавиши Esc. Элементу .img-upload__overlay возвращается класс hidden. У элемента body удаляется класс modal-open.*/
+/* eslint-disable */
+console.log(timeToJob('08:00', '17:30', '14:00', 90));
+console.log(timeToJob('8:0', '10:0', '8:0', 120));
+console.log(timeToJob('08:00', '14:30', '14:00', 90));
+console.log(timeToJob('14:00', '17:30', '08:0', 90));
+console.log(timeToJob('8:00', '17:30', '08:00', 900));
+ /* eslint-enable */
