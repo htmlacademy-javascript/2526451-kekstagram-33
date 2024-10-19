@@ -5,9 +5,9 @@
 // Продолжительность задаётся числом. Гарантируется, что и рабочий день, и встреча укладываются в одни календарные сутки.
 
 
-const timeToJob = (dayStart, dayEnd, meetingStart, meetingTimeMin) => {
+// const timeToJob = (dayStart, dayEnd, meetingStart, meetingTimeMin) => {
 
 
-};
+// };
 
-console.log(timeToJob());
+// console.log(timeToJob());
