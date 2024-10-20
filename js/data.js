@@ -31,12 +31,11 @@ const getCommentsArray = () => {
 const createUserPhoto = () =>
   ({
     id: getUserId(),
-    avatar: `photos/${ userId }.jpg`,
+    url: `photos/${ userId }.jpg`,
     description: 'описаниефотографии',
     likes: getRandomInteger(15, 200),
     comments: getCommentsArray(),
   });
 
-// const usersArray = Array.from({length: 25},createUserPhoto);
-// console.table(usersArray);
-export {createUserPhoto};
+const usersArray = (amountOfData) => Array.from({length: amountOfData},createUserPhoto);
+export {usersArray};
