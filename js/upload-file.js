@@ -1,27 +1,40 @@
 const uploadFile = document.querySelector('.img-upload__input');
 const uploadOverlay = document.querySelector('.img-upload__overlay');
 const overlayCloseButton = document.querySelector('.img-upload__cancel');
-const bodyArray = document.getElementsByTagName('body');
-const [body] = bodyArray;
+const body = document.body;
 
-uploadFile.onclick = function (evt) {
-  evt.preventDefault();
-  uploadOverlay.classList.remove('hidden');
-  body.classList.add('modal-open');
-  // document.addEventListener('keydown', windowCloseEvent);
-  document.addEventListener('keydown', (e)=> {
-    if (e.keyCode === 27) {
-      uploadOverlay.classList.add('hidden');
-      body.classList.remove('modal-open');
-    }
-    // body.style.backgroundColor = 'white';
-  });
+
+const onModalEscKeyDown = (evt) => {
+  if (evt.keyCode === 27) {
+    uploadOverlay.classList.add('hidden');
+    body.classList.remove('modal-open');
+
+    document.removeEventListener('keydown', onModalEscKeyDown);
+    overlayCloseButton.removeEventListener('click', onModalCloseBtnClick);
+  }
 };
-overlayCloseButton.onclick = function () {
+const onModalCloseBtnClick = (evt) => {
+  evt.preventDefault();
+
   uploadOverlay.classList.add('hidden');
   body.classList.remove('modal-open');
+  overlayCloseButton.removeEventListener('click', onModalCloseBtnClick);
+  document.removeEventListener('keydown', onModalEscKeyDown);
 };
 
+
+const onFileUploadBtnClick = (evt) => {
+  evt.preventDefault();
+
+  uploadOverlay.classList.remove('hidden');
+  body.classList.add('modal-open');
+
+  document.addEventListener('keydown', onModalEscKeyDown);
+  overlayCloseButton.addEventListener('click', onModalCloseBtnClick);
+  // uploadFile.removeEventListener('click', windowOpenEvent);
+};
+
+uploadFile.addEventListener('click', onFileUploadBtnClick);
 
 // };
 /*

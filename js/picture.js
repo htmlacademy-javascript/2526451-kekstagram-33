@@ -15,8 +15,8 @@ newPictures.forEach((picture) =>{
   newPictureImage.src = picture.url;
   newPictureImage.alt = picture.description;
 
-  const newPictureInfo = newPicture.querySelector('.picture__info').children;
-  const [comments, likes] = newPictureInfo;
+  const [comments, likes] = newPicture.querySelector('.picture__info').children;
+  //   const [comments, likes] = newPictureInfo;
   likes.textContent = picture.likes;
   comments.textContent = picture.comments.length;
   pictureContainer.appendChild(newPicture);
