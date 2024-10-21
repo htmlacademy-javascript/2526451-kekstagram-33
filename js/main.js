@@ -1,3 +1,4 @@
 import './data.js';
-import './upload-file.js';
+import './modal-shown-events.js';
 import './picture.js';
+import './full-size-image.js';

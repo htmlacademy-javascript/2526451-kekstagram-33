@@ -199,6 +199,11 @@ main {
   line-height: 0;
 }
 
+.picture:hover {
+  transition: all linear 200ms;
+  transform: scale(1.05);
+}
+
 .picture__img {
   max-width: auto;
   width: 100%;

@@ -1,44 +1,40 @@
+import {isEscapeKey} from './util.js';
+
 const uploadFile = document.querySelector('.img-upload__input');
 const uploadOverlay = document.querySelector('.img-upload__overlay');
 const overlayCloseButton = document.querySelector('.img-upload__cancel');
 const body = document.body;
 
+const onDocumentKeydown = (evt) => {
+  if (isEscapeKey(evt)) {
+    evt.preventDefault();
 
-const onModalEscKeyDown = (evt) => {
-  if (evt.keyCode === 27) {
-    uploadOverlay.classList.add('hidden');
-    body.classList.remove('modal-open');
-
-    document.removeEventListener('keydown', onModalEscKeyDown);
-    overlayCloseButton.removeEventListener('click', onModalCloseBtnClick);
+    closeModalWindow();
   }
 };
-const onModalCloseBtnClick = (evt) => {
+
+function openModalWindow (evt) {
   evt.preventDefault();
-
-  uploadOverlay.classList.add('hidden');
-  body.classList.remove('modal-open');
-  overlayCloseButton.removeEventListener('click', onModalCloseBtnClick);
-  document.removeEventListener('keydown', onModalEscKeyDown);
-};
-
-
-const onFileUploadBtnClick = (evt) => {
-  evt.preventDefault();
-
   uploadOverlay.classList.remove('hidden');
+
   body.classList.add('modal-open');
 
-  document.addEventListener('keydown', onModalEscKeyDown);
-  overlayCloseButton.addEventListener('click', onModalCloseBtnClick);
-  // uploadFile.removeEventListener('click', windowOpenEvent);
-};
+  document.addEventListener('keydown', onDocumentKeydown);
+}
 
-uploadFile.addEventListener('click', onFileUploadBtnClick);
+function closeModalWindow () {
+  uploadOverlay.classList.add('hidden');
 
-// };
+  body.classList.remove('modal-open');
+
+  document.removeEventListener('keydown', onDocumentKeydown);
+}
+
+uploadFile.addEventListener('click', openModalWindow);
+
+overlayCloseButton.addEventListener('click', closeModalWindow) ;
+
 /*
-
 1. Загрузка нового изображения на сайт и заполнение информации о нём
 1.1. Загрузка нового изображения:
 

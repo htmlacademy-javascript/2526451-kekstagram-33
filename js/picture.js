@@ -16,10 +16,28 @@ newPictures.forEach((picture) =>{
   newPictureImage.alt = picture.description;
 
   const [comments, likes] = newPicture.querySelector('.picture__info').children;
-  //   const [comments, likes] = newPictureInfo;
   likes.textContent = picture.likes;
   comments.textContent = picture.comments.length;
   pictureContainer.appendChild(newPicture);
 });
 
+
+/*
+for (let i = 0; i < newPictures.length; i++) {
+  const newPicture = pictureTemplate.cloneNode(true);
+  const newPintureData = getRandomArrayElement(newPictures);
+
+  const newPictureImage = newPicture.querySelector('.picture__img');
+  newPictureImage.src = newPintureData.url;
+  newPictureImage.alt = newPintureData.description;
+
+  const [comments, likes] = newPicture.querySelector('.picture__info').children;
+  likes.textContent = newPintureData.likes;
+  comments.textContent = newPintureData.comments.length;
+  pictureContainer.appendChild(newPicture);
+}
+
+*/
+
 pictures.appendChild(pictureContainer);
+export {pictures};
