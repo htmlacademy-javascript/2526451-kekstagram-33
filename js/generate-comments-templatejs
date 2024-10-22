@@ -1,12 +1,13 @@
-import { newPictures } from './picture';
+import { newPictures } from './generate-pictures';
 
 const newCommentArea = document.querySelector('.social__comments');
+const commentContainer = document.createDocumentFragment();
 
-// DECRIPPTION!!!!!!
 
 function createComment (id) {
-
+// минус 1 идем по ID
   newPictures[id - 1].comments.forEach ((comment) => {
+
     const newCommentTemplate = document.createElement('LI');
     newCommentTemplate.classList.add('social__comment');
 
@@ -14,7 +15,8 @@ function createComment (id) {
     newCommentImage.classList.add('social__picture');
     newCommentImage.src = comment.avatar;
     newCommentImage.alt = comment.name;
-
+    newCommentImage.setAttribute('width', '35');
+    newCommentImage.setAttribute('height', '35');
     newCommentTemplate.appendChild(newCommentImage);
 
     const newCommentDescription = document.createElement('P');
@@ -22,8 +24,10 @@ function createComment (id) {
     newCommentDescription.textContent = comment.message;
     newCommentTemplate.appendChild(newCommentDescription);
 
-    newCommentArea.appendChild(newCommentTemplate);
+    commentContainer.appendChild(newCommentTemplate);
   });
+  newCommentArea.innerHTML = '';
+  newCommentArea.appendChild(commentContainer);
 }
 
 export {createComment};

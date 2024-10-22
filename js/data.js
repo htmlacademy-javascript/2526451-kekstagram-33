@@ -4,38 +4,47 @@ const commentsArray = 'Всё отлично!/В целом всё неплох�
 
 const namesArray = 'Василий, Кирилл, Иван, Егор,Федор, Роман, Глеб, Григорий, Елисей, Захар, Николай, Петр, Прохор, Савелий, Эдуард, Евгений, Игорь, Олег, Денис, Вячеслав, Станислав, Всеволод, Леонид, Савва, Степан, Архип'.split(', ');
 
+const descriptionsArray = [ 'Красивая сцена.', 'Уютный момент.', 'Природа в своем великолепии.', 'Момент спокойствия.',
+  'Вдохновляющий пейзаж.', 'Тишина и гармония.', 'Яркие цвета и текстуры.', 'Свет и тень в кадре.', 'Эмоции в каждом кадре.',
+  'Простой, но захватывающий момент.'];
+
 let userId = 0;
-const getUserId = () => {
+function getUserId () {
   userId++;
   return userId;
-};
+}
 
 let commentId = 0;
-const getCommentId = () => {
+function getCommentId () {
   commentId++;
   return commentId;
-};
+}
 
-const createComment = () => ({
-  commentId: getCommentId(),
-  avatar: `img/avatar-${ getRandomInteger(1,6) }.svg`,
-  message: commentsArray[getRandomInteger(0, commentsArray.length - 1)],
-  name: namesArray[getRandomInteger(0, namesArray.length - 1)]
-});
+function createComment() {
+  return {
+    commentId: getCommentId(),
+    avatar: `img/avatar-${ getRandomInteger(1,6) }.svg`,
+    message: commentsArray[getRandomInteger(0, commentsArray.length - 1)],
+    name: namesArray[getRandomInteger(0, namesArray.length - 1)]
+  };
+}
 
-const getCommentsArray = () => {
-  const commentAray = Array.from({length: getRandomInteger(1,30)},createComment);
-  return commentAray;
-};
+function getCommentsArray () {
+  const commentArray = Array.from({length: getRandomInteger(1,30)},createComment);
+  // Обнулять не обнулять..
+  // commentId = 0;
+  return commentArray;
+}
 
-const createUserPhoto = () =>
-  ({
+function createUserPhoto() {
+  return {
     id: getUserId(),
     url: `photos/${ userId }.jpg`,
-    description: 'описаниефотографии',
+    description: descriptionsArray[getRandomInteger(0,descriptionsArray.length - 1)],
     likes: getRandomInteger(15, 200),
-    comments: getCommentsArray(),
-  });
-
-const usersArray = (amountOfData) => Array.from({length: amountOfData},createUserPhoto);
-export {usersArray};
+    comments: getCommentsArray()
+  };
+}
+// const usersArray = (amountOfData) => Array.from({length: amountOfData},createUserPhoto);
+const photoDataArray = Array.from({length: 25},createUserPhoto);
+export {photoDataArray};

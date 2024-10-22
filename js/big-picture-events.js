@@ -1,15 +1,18 @@
 import { isEscapeKey } from './util.js';
-import {pictures} from './picture.js';
-import {createComment} from './full-size-image.js';
-
+import {pictures} from './generate-pictures.js';
+import {createComment} from './generate-comments-templatejs';
+// Окно
 const bigPictureWindow = document.querySelector('.big-picture');
 const bigPictureWindowCloseBtn = bigPictureWindow.querySelector('.big-picture__cancel');
 const bigPictureImage = bigPictureWindow.querySelector('.big-picture__img').children[0];
-
+// Счетчики
 const likesCount = bigPictureWindow.querySelector('.likes-count');
 const commentShownCount = bigPictureWindow.querySelector('.social__comment-shown-count');
 const commentsTotalCount = bigPictureWindow.querySelector('.social__comment-total-count');
+const commentsTotalCountContainer = bigPictureWindow.querySelector('.social__comment-count');
+const commentsLoader = bigPictureWindow.querySelector('.comments-loader');
 
+const pictureDescription = bigPictureWindow.querySelector('.social__caption');
 
 const onDocumentKeydown = (evt) => {
   if (isEscapeKey(evt)) {
@@ -31,20 +34,32 @@ function closeBigPictureWindow () {
 }
 
 function onPictureClick (evt) {
-
+  //почему цель таргета ИМГ а не ссылка?
   if (evt.target.nodeName === 'IMG') {
     const target = evt.target.parentElement;
-    const [targetImage, targetInfo] = target.children;
+
+    const [targetImage, { children: [newComentsCount, newLikesCount] }] = target.children;
     openBigPictureWindow();
+
     bigPictureImage.src = targetImage.src;
     commentShownCount.textContent = '3?';
-    commentsTotalCount.textContent = targetInfo.children[0].textContent;
-    likesCount.textContent = targetInfo.children[1].textContent;
+
+    commentsTotalCount.textContent = newComentsCount.textContent;
+    likesCount.textContent = newLikesCount.textContent;
+
+    pictureDescription.textContent = targetImage.alt;
 
     createComment(targetImage.id);
+    // убираем счетчики
+    commentsTotalCountContainer.classList.add('hidden');
+    commentsLoader.classList.add('hidden');
+
+    /* eslint-disable */
+    console.log('Идентификатор изображения:', targetImage.id);
+   /* eslint-enable */
+
   }
 }
-
 bigPictureWindowCloseBtn.addEventListener('click', closeBigPictureWindow);
 
 pictures.addEventListener('click', onPictureClick);
