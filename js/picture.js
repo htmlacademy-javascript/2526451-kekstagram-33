@@ -5,7 +5,7 @@ const pictures = document.querySelector('.pictures');
 
 const pictureContainer = document.createDocumentFragment();
 
-const newPictures = usersArray(25);
+const newPictures = usersArray(25).sort(() => Math.random() - 0.5);
 // \.sort(() => Math.random() - 0.5);
 // временное решение c рандомом...
 // console.log(newPictures);
@@ -41,5 +41,5 @@ for (let i = 0; i < newPictures.length; i++) {
 */
 
 pictures.appendChild(pictureContainer);
-export {newPictures};
-export {pictures};
+export {};
+export {newPictures, pictures};
