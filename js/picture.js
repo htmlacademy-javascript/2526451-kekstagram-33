@@ -6,21 +6,22 @@ const pictures = document.querySelector('.pictures');
 const pictureContainer = document.createDocumentFragment();
 
 const newPictures = usersArray(25);
-// временное решение...
-newPictures.sort(() => Math.random() - 0.5);
+// \.sort(() => Math.random() - 0.5);
+// временное решение c рандомом...
+// console.log(newPictures);
 
-newPictures.forEach((picture) =>{
+newPictures.forEach((picture) => {
   const newPicture = pictureTemplate.cloneNode(true);
   const newPictureImage = newPicture.querySelector('.picture__img');
   newPictureImage.src = picture.url;
   newPictureImage.alt = picture.description;
-
+  newPictureImage.id = picture.id;
+  // console.table(picture);
   const [comments, likes] = newPicture.querySelector('.picture__info').children;
   likes.textContent = picture.likes;
   comments.textContent = picture.comments.length;
   pictureContainer.appendChild(newPicture);
 });
-
 
 /*
 for (let i = 0; i < newPictures.length; i++) {
@@ -40,4 +41,5 @@ for (let i = 0; i < newPictures.length; i++) {
 */
 
 pictures.appendChild(pictureContainer);
+export {newPictures};
 export {pictures};

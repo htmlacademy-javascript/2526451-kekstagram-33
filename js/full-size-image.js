@@ -35,15 +35,21 @@
 
 Подключите модуль в проект.
 */
-import { pictures } from './picture';
-import { isEscapeKey } from './util';
+// import {newPictures} from './picture';
 
+import { isEscapeKey } from './util';
+import { pictures } from './picture';
+import { newPictures } from './picture';
 const bigPictureWindow = document.querySelector('.big-picture');
 const bigPictureWindowCloseBtn = bigPictureWindow.querySelector('.big-picture__cancel');
 const bigPictureImage = bigPictureWindow.querySelector('.big-picture__img').children[0];
+
+const newCommentArea = document.querySelector('.social__comments');
 const likesCount = bigPictureWindow.querySelector('.likes-count');
 const commentShownCount = bigPictureWindow.querySelector('.social__comment-shown-count');
 const commentsTotalCount = bigPictureWindow.querySelector('.social__comment-total-count');
+
+// const [bigPictureCommentAvatar, bigPictureCommentDescription] = bigPictureWindow.querySelector('.social__comment').children;
 
 const onDocumentKeydown = (evt) => {
   if (isEscapeKey(evt)) {
@@ -51,8 +57,6 @@ const onDocumentKeydown = (evt) => {
     closeBigPictureWindow();
   }
 };
-
-console.log(pictures);
 
 function openBigPictureWindow () {
   bigPictureWindow.classList.remove('hidden');
@@ -67,11 +71,75 @@ function closeBigPictureWindow () {
 
 }
 
+// Убраться в  Коде
+// console.log(bigPictureCommentAvatar);
+// console.log(bigPictureCommentDescription);
+const newCommentContainer = document.createDocumentFragment();
+
+// function createCommentTemplate () {
+// }
+
+
+// const newPictureComents = [];
+// newPictures.forEach((picture) => {
+
+// picture.comments.forEach((comment) => {
+
+// function createComment (id) {
+//   const newCommentTemplate = document.createElement('LI');
+//   newCommentTemplate.classList.add('social__comment');
+
+//   const newCommentImage = document.createElement('IMG');
+//   newCommentImage.classList.add('social__picture');
+//   newCommentImage.src = comment.avatar;
+//   newCommentImage.alt = comment.name;
+
+//   newCommentTemplate.appendChild(newCommentImage);
+
+//   const newCommentDescription = document.createElement('P');
+//   newCommentDescription.classList.add('social__text');
+//   newCommentDescription.textContent = comment.message;
+//   newCommentTemplate.appendChild(newCommentDescription);
+
+//   newCommentContainer.appendChild(newCommentTemplate);
+//   console.log(newCommentTemplate);
+// // newCommentArea.appendChild(newCommentTemplate);
+// }
+
+// console.log(newPictures[2].comments);
+
+function createComment (id) {
+  console.log(newPictures[id - 1].comments);
+
+  newPictures[id - 1].comments.forEach ((comment) => {
+    const newCommentTemplate = document.createElement('LI');
+    newCommentTemplate.classList.add('social__comment');
+
+    const newCommentImage = document.createElement('IMG');
+    newCommentImage.classList.add('social__picture');
+    newCommentImage.src = comment.avatar;
+    newCommentImage.alt = comment.name;
+
+    newCommentTemplate.appendChild(newCommentImage);
+
+    const newCommentDescription = document.createElement('P');
+    newCommentDescription.classList.add('social__text');
+    newCommentDescription.textContent = comment.message;
+    newCommentTemplate.appendChild(newCommentDescription);
+
+    // console.log(newCommentTemplate);
+    newCommentArea.appendChild(newCommentTemplate);
+  });
+// newCommentArea.appendChild(newCommentImage);
+}
+
+//   });
+// });
+
+
 function onPictureClick (evt) {
   const target = evt.target.parentElement;
   const [targetImage, targetInfo] = target.children;
-  // console.log(evt.currentTarget);
-  console.log(targetInfo.children[0]);
 
   if (evt.target.nodeName === 'IMG') {
     openBigPictureWindow();
@@ -79,6 +147,8 @@ function onPictureClick (evt) {
     commentShownCount.textContent = '3?';
     commentsTotalCount.textContent = targetInfo.children[0].textContent;
     likesCount.textContent = targetInfo.children[1].textContent;
+
+    createComment(targetImage.id);
   }
 }
 
