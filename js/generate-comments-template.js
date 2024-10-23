@@ -1,4 +1,5 @@
 import { photoDataArray } from './data.js';
+import {hideComments} from './new-module.js';
 
 const newCommentArea = document.querySelector('.social__comments');
 const commentContainer = document.createDocumentFragment();
@@ -40,9 +41,11 @@ function generateComment (pictureSrc) {
 
       commentContainer.appendChild(newCommentTemplate);
     });
-    newCommentArea.innerHTML = '';
+    // newCommentArea.innerHTML = '';
     newCommentArea.appendChild(commentContainer);
   }
+
+  hideComments();
 }
 
 export { generateComment};

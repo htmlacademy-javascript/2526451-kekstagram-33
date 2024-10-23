@@ -1,6 +1,6 @@
 import { isEscapeKey } from './util.js';
 import {pictures} from './generate-pictures.js';
-import {generateComment} from './generate-comments-template.js';
+import {generateComment as generateComments} from './generate-comments-template.js';
 // Окно
 const bigPictureWindow = document.querySelector('.big-picture');
 const bigPictureWindowCloseBtn = bigPictureWindow.querySelector('.big-picture__cancel');
@@ -9,8 +9,6 @@ const bigPictureImage = bigPictureWindow.querySelector('.big-picture__img').chil
 const likesCount = bigPictureWindow.querySelector('.likes-count');
 const commentShownCount = bigPictureWindow.querySelector('.social__comment-shown-count');
 const commentsTotalCount = bigPictureWindow.querySelector('.social__comment-total-count');
-const commentsTotalCountContainer = bigPictureWindow.querySelector('.social__comment-count');
-const commentsLoader = bigPictureWindow.querySelector('.comments-loader');
 
 const pictureDescription = bigPictureWindow.querySelector('.social__caption');
 
@@ -49,18 +47,11 @@ function onPictureClick (evt) {
 
     pictureDescription.textContent = targetImage.alt;
 
-    generateComment(targetImage.src);
-
-    // убираем счетчики
-    commentsTotalCountContainer.classList.add('hidden');
-    commentsLoader.classList.add('hidden');
-
-    /* eslint-disable */
-    console.log('src Img:', targetImage.src);
-   /* eslint-enable */
-
+    generateComments(targetImage.src);
   }
 }
 bigPictureWindowCloseBtn.addEventListener('click', closeBigPictureWindow);
 
 pictures.addEventListener('click', onPictureClick);
+
+export {bigPictureWindow};
