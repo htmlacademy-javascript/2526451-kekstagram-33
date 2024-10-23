@@ -1,6 +1,6 @@
 import { isEscapeKey } from './util.js';
 import {pictures} from './generate-pictures.js';
-import {createComment} from './generate-comments-templatejs';
+import {generateComment} from './generate-comments-template.js';
 // Окно
 const bigPictureWindow = document.querySelector('.big-picture');
 const bigPictureWindowCloseBtn = bigPictureWindow.querySelector('.big-picture__cancel');
@@ -34,7 +34,7 @@ function closeBigPictureWindow () {
 }
 
 function onPictureClick (evt) {
-  //почему цель таргета ИМГ а не ссылка?
+
   if (evt.target.nodeName === 'IMG') {
     const target = evt.target.parentElement;
 
@@ -49,13 +49,14 @@ function onPictureClick (evt) {
 
     pictureDescription.textContent = targetImage.alt;
 
-    createComment(targetImage.id);
+    generateComment(targetImage.src);
+
     // убираем счетчики
     commentsTotalCountContainer.classList.add('hidden');
     commentsLoader.classList.add('hidden');
 
     /* eslint-disable */
-    console.log('Идентификатор изображения:', targetImage.id);
+    console.log('src Img:', targetImage.src);
    /* eslint-enable */
 
   }

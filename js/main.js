@@ -1,5 +1,5 @@
 import './data.js';
 import './modal-shown-events.js';
 import './generate-pictures.js';
-import './generate-comments-templatejs';
+import './generate-comments-template.js';
 import './big-picture-events.js';
