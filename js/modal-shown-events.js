@@ -1,31 +1,40 @@
+import {isEscapeKey} from './util.js';
+
 const uploadFile = document.querySelector('.img-upload__input');
 const uploadOverlay = document.querySelector('.img-upload__overlay');
 const overlayCloseButton = document.querySelector('.img-upload__cancel');
-const bodyArray = document.getElementsByTagName('body');
-const [body] = bodyArray;
+const body = document.body;
 
-uploadFile.onclick = function (evt) {
+const onDocumentKeydown = (evt) => {
+  if (isEscapeKey(evt)) {
+    evt.preventDefault();
+
+    closeModalWindow();
+  }
+};
+
+function openModalWindow (evt) {
   evt.preventDefault();
   uploadOverlay.classList.remove('hidden');
+
   body.classList.add('modal-open');
-  // document.addEventListener('keydown', windowCloseEvent);
-  document.addEventListener('keydown', (e)=> {
-    if (e.keyCode === 27) {
-      uploadOverlay.classList.add('hidden');
-      body.classList.remove('modal-open');
-    }
-    // body.style.backgroundColor = 'white';
-  });
-};
-overlayCloseButton.onclick = function () {
+
+  document.addEventListener('keydown', onDocumentKeydown);
+}
+
+function closeModalWindow () {
   uploadOverlay.classList.add('hidden');
+
   body.classList.remove('modal-open');
-};
 
+  document.removeEventListener('keydown', onDocumentKeydown);
+}
 
-// };
+uploadFile.addEventListener('click', openModalWindow);
+
+overlayCloseButton.addEventListener('click', closeModalWindow) ;
+
 /*
-
 1. Загрузка нового изображения на сайт и заполнение информации о нём
 1.1. Загрузка нового изображения:
 

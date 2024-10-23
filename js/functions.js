@@ -6,11 +6,8 @@ const timeToJob = (dayStart, dayEnd, meetingStart, meetingTimeMin) => {
     minutes = minutes + Number((toMinutes[i])[1]);
     minutesVal.push(minutes);
   }
-  const dayStartInMinutes = minutesVal[0];
-  const dayEndInMinutes = minutesVal[1];
-  const meetingStartInMinutes = minutesVal[2];
-
-  const meetTime = minutesVal[2] + meetingTimeMin;
+  const [dayStartInMinutes,dayEndInMinutes,meetingStartInMinutes] = minutesVal;
+  const meetTime = meetingStartInMinutes + meetingTimeMin;
 
   if (meetTime > dayEndInMinutes || meetingStartInMinutes < dayStartInMinutes) {
     return false;
