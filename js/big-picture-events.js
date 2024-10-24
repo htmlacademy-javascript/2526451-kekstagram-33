@@ -1,7 +1,7 @@
 import { isEscapeKey } from './util.js';
 import {pictures} from './generate-pictures.js';
 import {generateComments } from './generate-comments-template.js';
-import { hideCommentsOnLoadBigPicture,showNextComments , getCommentShownCount} from './new-module.js';
+import { hideCommentsOnLoadBigPicture,showNextComments , getCommentShownCount} from './comments-functions.js';
 
 // Окно
 const bigPictureWindow = document.querySelector('.big-picture');
@@ -31,8 +31,6 @@ function getCommentsList (){
 
 const commentsLoader = bigPictureWindow.querySelector('.comments-loader');
 
-// const HIDE_COMMENTS_COUNT_START = 5;
-
 
 function openBigPictureWindow () {
 
@@ -50,7 +48,7 @@ function closeBigPictureWindow () {
   document.body.classList.remove('modal-open');
 }
 
-function showHideCommentsLoader () {
+function hideCommentsLoader () {
   const commentsList = getCommentsList();
   if (commentsList.length <= 5) {
     commentsLoader.classList.add('hidden');
@@ -66,7 +64,6 @@ function onPictureClick (evt) {
 
     const [targetImage, { children: [newComentsCount, newLikesCount] }] = target.children;
     openBigPictureWindow();
-    getCommentShownCount();
 
     bigPictureImage.src = targetImage.src;
     commentsTotalCount.textContent = newComentsCount.textContent;
@@ -75,7 +72,8 @@ function onPictureClick (evt) {
     pictureDescription.textContent = targetImage.alt;
 
     generateComments(targetImage.src);
-    showHideCommentsLoader();
+    hideCommentsLoader();
+    getCommentShownCount();
   }
 }
 

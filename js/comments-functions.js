@@ -1,8 +1,7 @@
 
 import {commentsLoader, getCommentsList, commentShownCount} from './big-picture-events.js';
-
-
-let displayedCommentsCount = 5;
+const INITIAL_COMMENTS_TO_SHOW = 5;
+let displayedCommentsCount = INITIAL_COMMENTS_TO_SHOW;
 
 function hideCommentsOnLoadBigPicture() {
   const commentsList = getCommentsList();
@@ -14,16 +13,11 @@ function hideCommentsOnLoadBigPicture() {
 }
 
 function getCommentShownCount () {
-
+  // ох уж этот гет коментс...
   const commentsList = getCommentsList();
   if (commentsList.length < displayedCommentsCount) {
     commentShownCount.textContent = commentsList.length;
-
-    console.log(commentShownCount.textContent);
-    console.log(commentsList.length);
-    console.log('true');
   } else {
-    console.log('else');
     commentShownCount.textContent = displayedCommentsCount;
   }
 }
@@ -36,12 +30,15 @@ function showNextComments () {
     for (let i = displayedCommentsCount; i < displayedCommentsCount + COMMENTS_TO_SHOW && i < commentsList.length ; i++) {
       commentsList[i].classList.remove('hidden');
     }
-    if (displayedCommentsCount <= commentsList.length - 1) {
-      commentsLoader.classList.add('hidden');
-    } else {
-      displayedCommentsCount = displayedCommentsCount + COMMENTS_TO_SHOW;
+  }
+  displayedCommentsCount += COMMENTS_TO_SHOW;
+  commentShownCount.textContent = displayedCommentsCount;
 
-    }
+  if (displayedCommentsCount >= commentsList.length) {
+    commentShownCount.textContent = commentsList.length;
+    commentsLoader.classList.add('hidden');
+    displayedCommentsCount = INITIAL_COMMENTS_TO_SHOW;
   }
 }
+// тернальный есть такой. не забывай
 export {hideCommentsOnLoadBigPicture, showNextComments , getCommentShownCount};
