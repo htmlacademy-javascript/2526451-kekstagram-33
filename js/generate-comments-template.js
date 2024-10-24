@@ -1,24 +1,14 @@
 import { photoDataArray } from './data.js';
-import {hideComments} from './new-module.js';
 
 const newCommentArea = document.querySelector('.social__comments');
 const commentContainer = document.createDocumentFragment();
 
 
-function generateComment (pictureSrc) {
+function generateComments (pictureSrc) {
 
-  //pictureSrc приходит полным путем localhost и тд
-
-  // делаем ссылкой
   const url = new URL(pictureSrc);
-  // .. полный путь
   const imagePath = url.pathname;
-  // убираем вначале /
   const formattedPath = imagePath.slice(1);
-
-  // перебираем и сравниваю. возвращаю элемент массива нужный по Клику...
-
-  // ну костылище же
   const pictureData = photoDataArray.find((imgUrl) => imgUrl.url === formattedPath);
 
   if (pictureData && pictureData.comments) {
@@ -41,11 +31,10 @@ function generateComment (pictureSrc) {
 
       commentContainer.appendChild(newCommentTemplate);
     });
-    // newCommentArea.innerHTML = '';
+    newCommentArea.innerHTML = '';
     newCommentArea.appendChild(commentContainer);
   }
 
-  hideComments();
 }
 
-export { generateComment};
+export { generateComments};

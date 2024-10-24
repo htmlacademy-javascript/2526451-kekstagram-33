@@ -1,8 +1,14 @@
 import { isEscapeKey } from './util.js';
 import {pictures} from './generate-pictures.js';
-import {generateComment as generateComments} from './generate-comments-template.js';
+import {generateComments } from './generate-comments-template.js';
+import {hideComments,showComments} from './new-module.js';
+
 // Окно
 const bigPictureWindow = document.querySelector('.big-picture');
+// временно по переменнымы
+const commentsLoader = bigPictureWindow.querySelector('.comments-loader');
+
+
 const bigPictureWindowCloseBtn = bigPictureWindow.querySelector('.big-picture__cancel');
 const bigPictureImage = bigPictureWindow.querySelector('.big-picture__img').children[0];
 // Счетчики
@@ -19,10 +25,17 @@ const onDocumentKeydown = (evt) => {
   }
 };
 
+
+// const HIDE_COMMENTS_COUNT_START = 5;
+
+
 function openBigPictureWindow () {
   bigPictureWindow.classList.remove('hidden');
-  document.addEventListener('keydown', onDocumentKeydown);
   document.body.classList.add('modal-open');
+
+  document.addEventListener('keydown', onDocumentKeydown);
+  commentsLoader.addEventListener ('click', showComments);
+
 }
 
 function closeBigPictureWindow () {
@@ -49,9 +62,11 @@ function onPictureClick (evt) {
 
     generateComments(targetImage.src);
   }
+
 }
 bigPictureWindowCloseBtn.addEventListener('click', closeBigPictureWindow);
 
 pictures.addEventListener('click', onPictureClick);
+pictures.addEventListener('click', hideComments);
 
 export {bigPictureWindow};

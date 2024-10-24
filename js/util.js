@@ -9,4 +9,12 @@ const getRandomArrayElement = (elements) => elements[getRandomInteger(0, element
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
-export {getRandomInteger,getRandomArrayElement, isEscapeKey};
+function createCounter () {
+  let count = 0;
+  return function getId () {
+    count++;
+    return count;
+  };
+}
+
+export {getRandomInteger,getRandomArrayElement, isEscapeKey, createCounter};
