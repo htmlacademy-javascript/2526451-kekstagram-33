@@ -5,7 +5,7 @@ const commentContainer = document.createDocumentFragment();
 
 
 function generateComments (pictureSrc) {
-
+  // упрости перепиши
   const url = new URL(pictureSrc);
   const imagePath = url.pathname;
   const formattedPath = imagePath.slice(1);
@@ -31,6 +31,7 @@ function generateComments (pictureSrc) {
 
       commentContainer.appendChild(newCommentTemplate);
     });
+
     newCommentArea.innerHTML = '';
     newCommentArea.appendChild(commentContainer);
   }

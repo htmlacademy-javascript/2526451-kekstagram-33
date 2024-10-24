@@ -1,19 +1,23 @@
 
-import {bigPictureWindow} from './big-picture-events.js';
+import {commentsLoader, getCommentsList} from './big-picture-events.js';
+
+// Условный (тернарный) оператор!!!!!!!!!!!!!!!!
 
 // const commentsLoader = bigPictureWindow.querySelector('.comments-loader');
 
 // const commentsTotalCountContainer = bigPictureWindow.querySelector('.social__comment-count');
 // console.log(bigPictureWindow);
 
-function getCommentsList (){
-  return bigPictureWindow.querySelectorAll('.social__comment');
-}
+// const commentsCount = getCommentsList();
+
+// console.log(commentsCount.length);
 
 let displayedCommentsCount = 5;
+// console.log(displayedCommentsCount);
 
-function hideComments() {
+function onClickHideComments() {
   const commentsList = getCommentsList();
+  console.log(commentsLoader);
 
   commentsList.forEach ((comment, index) => {
     if (index >= displayedCommentsCount) {
@@ -21,7 +25,6 @@ function hideComments() {
     }
   });
 }
-
 
 function showComments () {
   const commentsList = getCommentsList();
@@ -31,11 +34,12 @@ function showComments () {
   }
   displayedCommentsCount = displayedCommentsCount + 5;
 
-  if (displayedCommentsCount >= commentsList.length) {
-    console.log('displayedCommentsCount', 'хватит');
-  }
-  console.log(commentsList);
+  // if (displayedCommentsCount >= commentsList.length) {
+  //   commentsLoader.classList.add('hidden');
+  //   console.log('displayedCommentsCount', 'хватит');
+  // }
+  console.log(displayedCommentsCount);
 }
 
 
-export {hideComments, showComments};
+export {onClickHideComments, showComments, displayedCommentsCount};
