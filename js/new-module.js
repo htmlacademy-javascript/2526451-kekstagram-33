@@ -1,24 +1,11 @@
 
-import {commentsLoader, getCommentsList} from './big-picture-events.js';
+import {commentsLoader, getCommentsList, commentShownCount} from './big-picture-events.js';
 
-// Условный (тернарный) оператор!!!!!!!!!!!!!!!!
-
-// const commentsLoader = bigPictureWindow.querySelector('.comments-loader');
-
-// const commentsTotalCountContainer = bigPictureWindow.querySelector('.social__comment-count');
-// console.log(bigPictureWindow);
-
-// const commentsCount = getCommentsList();
-
-// console.log(commentsCount.length);
 
 let displayedCommentsCount = 5;
-// console.log(displayedCommentsCount);
 
-function onClickHideComments() {
+function hideCommentsOnLoadBigPicture() {
   const commentsList = getCommentsList();
-  console.log(commentsLoader);
-
   commentsList.forEach ((comment, index) => {
     if (index >= displayedCommentsCount) {
       comment.classList.add('hidden');
@@ -26,20 +13,35 @@ function onClickHideComments() {
   });
 }
 
-function showComments () {
+function getCommentShownCount () {
+
   const commentsList = getCommentsList();
+  if (commentsList.length < displayedCommentsCount) {
+    commentShownCount.textContent = commentsList.length;
 
-  for (let i = displayedCommentsCount; i < displayedCommentsCount + 5; i++) {
-    commentsList[i].classList.remove('hidden');
+    console.log(commentShownCount.textContent);
+    console.log(commentsList.length);
+    console.log('true');
+  } else {
+    console.log('else');
+    commentShownCount.textContent = displayedCommentsCount;
   }
-  displayedCommentsCount = displayedCommentsCount + 5;
-
-  // if (displayedCommentsCount >= commentsList.length) {
-  //   commentsLoader.classList.add('hidden');
-  //   console.log('displayedCommentsCount', 'хватит');
-  // }
-  console.log(displayedCommentsCount);
 }
 
+function showNextComments () {
+  const commentsList = getCommentsList();
+  const COMMENTS_TO_SHOW = 5;
 
-export {onClickHideComments, showComments, displayedCommentsCount};
+  if (displayedCommentsCount < commentsList.length) {
+    for (let i = displayedCommentsCount; i < displayedCommentsCount + COMMENTS_TO_SHOW && i < commentsList.length ; i++) {
+      commentsList[i].classList.remove('hidden');
+    }
+    if (displayedCommentsCount <= commentsList.length - 1) {
+      commentsLoader.classList.add('hidden');
+    } else {
+      displayedCommentsCount = displayedCommentsCount + COMMENTS_TO_SHOW;
+
+    }
+  }
+}
+export {hideCommentsOnLoadBigPicture, showNextComments , getCommentShownCount};
