@@ -1,8 +1,8 @@
 import {isEscapeKey} from './util.js';
-
+import { createSlider } from './slider.js';
 const uploadFile = document.querySelector('.img-upload__input');
 const uploadOverlay = document.querySelector('.img-upload__overlay');
-const overlayCloseButton = document.querySelector('.img-upload__cancel');
+const overlayCloseButton = uploadOverlay.querySelector('.img-upload__cancel');
 const body = document.body;
 
 const onDocumentKeydown = (evt) => {
@@ -20,6 +20,8 @@ function openModalWindow (evt) {
   body.classList.add('modal-open');
 
   document.addEventListener('keydown', onDocumentKeydown);
+
+  createSlider();
 }
 
 function closeModalWindow () {
@@ -49,3 +51,4 @@ overlayCloseButton.addEventListener('click', closeModalWindow) ;
 После выбора изображения пользователем с помощью стандартного контрола загрузки файла .img-upload__input, нужно подставить его в форму редактирования вместо тестового изображения в блок предварительного просмотра и в превью эффектов.
 
 1.3 Закрытие формы редактирования изображения производится либо нажатием на кнопку .img-upload__cancel, либо нажатием клавиши Esc. Элементу .img-upload__overlay возвращается класс hidden. У элемента body удаляется класс modal-open.*/
+export{uploadOverlay};

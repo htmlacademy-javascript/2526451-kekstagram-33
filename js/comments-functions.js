@@ -17,9 +17,10 @@ function getCommentShownCount () {
   const commentsList = getCommentsList();
   if (commentsList.length < displayedCommentsCount) {
     commentShownCount.textContent = commentsList.length;
-  } else {
-    commentShownCount.textContent = displayedCommentsCount;
   }
+  // else {
+  commentShownCount.textContent = displayedCommentsCount;
+  // }
 }
 
 function showNextComments () {
