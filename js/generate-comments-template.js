@@ -5,7 +5,7 @@ const commentContainer = document.createDocumentFragment();
 
 
 function generateComments (pictureSrc) {
-  newCommentArea.innerHTML = '';
+  console.log('clik');
 
   // упрости перепиши
   // все таки на ID перепиши
@@ -31,6 +31,7 @@ function generateComments (pictureSrc) {
 
     commentContainer.appendChild(newCommentTemplate);
   });
+  newCommentArea.innerHTML = '';
 
   newCommentArea.appendChild(commentContainer);
 }

@@ -5,6 +5,7 @@ let displayedCommentsCount = INITIAL_COMMENTS_TO_SHOW;
 
 function hideCommentsOnLoadBigPicture() {
   const commentsList = getCommentsList();
+  console.log(commentsList);
   commentsList.forEach ((comment, index) => {
     if (index >= displayedCommentsCount) {
       comment.classList.add('hidden');
