@@ -7,4 +7,6 @@ import './big-picture-events.js';
 import './comments-functions.js';
 import './util.js';
 import './slider.js';
-import './validator.js';
+import './validation/validator.js';
+import './validation/hashtags-formatter.js';
+import './validation/validation-events.js';
