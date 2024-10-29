@@ -1,5 +1,5 @@
 import {isEscapeKey} from './util.js';
-import { createSlider,destroySlider } from './slider.js';
+import { createSlider,destroySlider } from './slider/slider.js';
 // import {pictures} from './generate-pictures.js';
 import {addListner,removeListner} from './big-picture-events.js';
 

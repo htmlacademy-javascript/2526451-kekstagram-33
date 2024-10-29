@@ -11,7 +11,6 @@ function hideCommentsOnLoadBigPicture() {
       comment.classList.add('hidden');
     }
   });
-
 }
 
 function getCommentShownCount () {

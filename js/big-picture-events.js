@@ -35,7 +35,6 @@ const commentsLoader = bigPictureWindow.querySelector('.comments-loader');
 
 function openBigPictureWindow () {
 
-  console.log('фывфыв');
   bigPictureWindow.classList.remove('hidden');
   document.body.classList.add('modal-open');
 
@@ -80,7 +79,6 @@ function onPictureClick (evt) {
 
     likesCount.textContent = newLikesCount.textContent;
     pictureDescription.textContent = targetImage.alt;
-
 
     generateComments(targetImage.src);
     getCommentShownCount();
