@@ -4,13 +4,14 @@ const INITIAL_COMMENTS_TO_SHOW = 5;
 let displayedCommentsCount = INITIAL_COMMENTS_TO_SHOW;
 
 function hideCommentsOnLoadBigPicture() {
+  // displayedCommentsCount = 5;
   const commentsList = getCommentsList();
-  console.log(commentsList);
   commentsList.forEach ((comment, index) => {
-    if (index >= displayedCommentsCount) {
+    if (index >= INITIAL_COMMENTS_TO_SHOW) {
       comment.classList.add('hidden');
     }
   });
+
 }
 
 function getCommentShownCount () {
@@ -18,10 +19,9 @@ function getCommentShownCount () {
   const commentsList = getCommentsList();
   if (commentsList.length < displayedCommentsCount) {
     commentShownCount.textContent = commentsList.length;
+  } else {
+    commentShownCount.textContent = INITIAL_COMMENTS_TO_SHOW;
   }
-  // else {
-  commentShownCount.textContent = displayedCommentsCount;
-  // }
 }
 
 function showNextComments () {

@@ -5,7 +5,6 @@ const commentContainer = document.createDocumentFragment();
 
 
 function generateComments (pictureSrc) {
-  console.log('clik');
 
   // упрости перепиши
   // все таки на ID перепиши
