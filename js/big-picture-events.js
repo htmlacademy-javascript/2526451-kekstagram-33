@@ -72,8 +72,8 @@ function onPictureClick (evt) {
     pictureDescription.textContent = targetImage.alt;
 
     generateComments(targetImage.src);
-    hideCommentsLoader();
     getCommentShownCount();
+    hideCommentsLoader();
   }
 }
 
