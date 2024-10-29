@@ -43,4 +43,4 @@ uploadForm.addEventListener('submit', (evt) => {
   	/* eslint-enable */
 });
 
-export {hashtagsInput,uploadForm};
+export {hashtagsInput,uploadForm,comment};

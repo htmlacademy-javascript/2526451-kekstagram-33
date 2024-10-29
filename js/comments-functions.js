@@ -4,7 +4,7 @@ const INITIAL_COMMENTS_TO_SHOW = 5;
 let displayedCommentsCount = INITIAL_COMMENTS_TO_SHOW;
 
 function hideCommentsOnLoadBigPicture() {
-  // displayedCommentsCount = 5;
+  displayedCommentsCount = INITIAL_COMMENTS_TO_SHOW;
   const commentsList = getCommentsList();
   commentsList.forEach ((comment, index) => {
     if (index >= INITIAL_COMMENTS_TO_SHOW) {
