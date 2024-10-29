@@ -5,7 +5,6 @@ const slider = document.querySelector('.effect-level__slider');
 
 function createSlider() {
 
-
   noUiSlider.create(slider, {
     range: {
       min: 0,
@@ -20,5 +19,9 @@ function createSlider() {
 
 }
 
+function destroySlider() {
+  slider.noUiSlider.destroy();
+}
 
-export {createSlider};
+
+export {createSlider,destroySlider};
