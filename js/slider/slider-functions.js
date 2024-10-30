@@ -1,9 +1,3 @@
-import {uploadForm} from'../validation/validator.js';
-const uploadPreview = uploadForm.querySelector('.img-upload__preview');
+// import {uploadForm} from'../validation/validator.js';
+// import {slider,sliderValue} from'../slider/slider.js';
 
-function test (value) {
-  uploadPreview.style.opacity = value;
-
-}
-
-export {test};

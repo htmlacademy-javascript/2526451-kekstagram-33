@@ -4,7 +4,7 @@ import { createSlider,destroySlider } from './slider/slider.js';
 import {addListner,removeListner} from './big-picture-events.js';
 
 import {hashtagsInput,comment} from'./validation/validator.js';
-const uploadFile = document.querySelector('.img-upload__input');
+// const uploadFile = document.querySelector('.img-upload__input');
 const uploadOverlay = document.querySelector('.img-upload__overlay');
 const overlayCloseButton = uploadOverlay.querySelector('.img-upload__cancel');
 const body = document.body;
@@ -19,7 +19,7 @@ const onDocumentKeydown = (evt) => {
 };
 
 function openModalWindow (evt) {
-  evt.preventDefault();
+  // evt.preventDefault();
   uploadOverlay.classList.remove('hidden');
 
   body.classList.add('modal-open');
@@ -40,8 +40,8 @@ function closeModalWindow () {
   hashtagsInput.value = '';
   destroySlider();
 }
-
-uploadFile.addEventListener('click', openModalWindow);
+openModalWindow();
+// uploadFile.addEventListener('load', openModalWindow);
 overlayCloseButton.addEventListener('click', closeModalWindow) ;
 
 export{uploadOverlay,};

@@ -12,7 +12,6 @@ const hashtagsPristneValidator = new Pristine(uploadForm);
 
 function validateHashtagsInput(value) {
   if (value) {
-
     const hastTagsArray = value.split(' ');
 
     const allHashtagsRegularValid = validateAllhashtags(hastTagsArray);
@@ -26,11 +25,13 @@ function validateHashtagsInput(value) {
 }
 
 function validateCommentinput (value) {
-  if (value.length >= '140') {
+  if (value && value.length >= 140) {
     /* eslint-disable */
 		console.log(hashtagRules[9]);
 		/* eslint-enable */
+    return false;
   }
+  return true;
 }
 
 hashtagsPristneValidator.addValidator(hashtagsInput, validateHashtagsInput);
