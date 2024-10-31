@@ -9,6 +9,8 @@ const sliderContainer = uploadForm.querySelector('.img-upload__effect-level');
 const effectsContainer = uploadForm.querySelector('.img-upload__effects');
 const uploadPreview = uploadForm.querySelector('.img-upload__preview');
 
+const [preiewImage] = uploadPreview.children;
+
 const DEFAULT_STEP = 0.1;
 
 function createSlider() {
@@ -40,8 +42,8 @@ function destroySlider() {
 
 function sliderToValue (target){
   sliderValue.value = slider.noUiSlider.get();
-  uploadPreview.style.filter = EFFECTS[target].effect(sliderValue.value);
-  console.log(uploadPreview.style.filter);
+  preiewImage.style.filter = EFFECTS[target].effect(sliderValue.value);
+  // console.log(uploadPreview.style.filter);
 
 }
 
@@ -52,13 +54,13 @@ effectsContainer.addEventListener('change', (evt) => {
 
   if(evt.target.value === 'none') {
     sliderContainer.classList.add('hidden');
-    uploadPreview.style.removeProperty('filter');
+    preiewImage.style.removeProperty('filter');
     return;
   }
   if (sliderContainer.classList.contains(('hidden'))) {
     sliderContainer.classList.remove('hidden');
   }
-  uploadPreview.style.filter = EFFECTS[effectTarget].effect(EFFECTS[effectTarget].range.max);
+  preiewImage.style.filter = EFFECTS[effectTarget].effect(EFFECTS[effectTarget].range.max);
 
 
   function sliderUpdate() {
@@ -75,7 +77,4 @@ effectsContainer.addEventListener('change', (evt) => {
 });
 
 
-// export {chomeEffect,effectsContainer};
-//
-
-export {createSlider,destroySlider,slider,sliderValue};
+export {createSlider,destroySlider,slider,sliderValue,preiewImage};
