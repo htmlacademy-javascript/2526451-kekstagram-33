@@ -28,9 +28,19 @@ function hashtagsFormatter(hashtTagsArray) {
   return newArray;
 }
 
+
+hashtagsInput.addEventListener('focus', () => {
+  if (hashtagsInput.value === '') {
+    hashtagsInput.value = '#';
+  }
+});
+hashtagsInput.addEventListener('focusout', () => {
+  if (hashtagsInput.value === '#') {
+    hashtagsInput.value = '';
+  }
+});
+
 hashtagsInput.addEventListener('change', () => {
   const hastTagsArray = hashtagsInput.value.split(' ');
-  // const newHasgtagsWithSpaces = ;
   hashtagsInput.value = hashtagsFormatter(hastTagsArray).join(' ');
-  // console.log(hashtagsFormatter(hastTagsArray));
 });

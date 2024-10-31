@@ -1,5 +1,6 @@
 import { isEscapeKey } from './util.js';
 import {pictures} from './generate-pictures.js';
+
 import {generateComments } from './generate-comments-template.js';
 import { hideCommentsOnLoadBigPicture,showNextComments , getCommentShownCount} from './comments-functions.js';
 
@@ -39,7 +40,6 @@ function openBigPictureWindow () {
 
   document.addEventListener('keydown', onDocumentKeydown);
   commentsLoader.addEventListener ('click', showNextComments);
-
 }
 
 function closeBigPictureWindow () {
@@ -56,9 +56,18 @@ function hideCommentsLoader () {
     commentsLoader.classList.remove('hidden');
   }
 }
-
+// Пока костыль
+function removeListner () {
+  pictures.removeEventListener('click', onPictureClick);
+  pictures.removeEventListener('click', hideCommentsOnLoadBigPicture);
+}
+function addListner () {
+  pictures.addEventListener('click', onPictureClick);
+  pictures.addEventListener('click', hideCommentsOnLoadBigPicture);
+}
 
 function onPictureClick (evt) {
+
   if (evt.target.nodeName === 'IMG') {
     const target = evt.target.parentElement;
 
@@ -82,4 +91,4 @@ bigPictureWindowCloseBtn.addEventListener('click', closeBigPictureWindow);
 pictures.addEventListener('click', onPictureClick);
 pictures.addEventListener('click', hideCommentsOnLoadBigPicture);
 
-export {getCommentsList, commentsLoader, commentShownCount};
+export {getCommentsList, commentsLoader, commentShownCount,removeListner,addListner};
