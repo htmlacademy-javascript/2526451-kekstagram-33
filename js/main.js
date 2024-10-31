@@ -13,3 +13,5 @@ import './slider/slider-effects.js';
 import './validation/validator.js';
 import './validation/hashtags-formatter.js';
 import './validation/validation-events.js';
+
+import './scale-handler.js';

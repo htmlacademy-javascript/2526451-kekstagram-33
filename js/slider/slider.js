@@ -12,6 +12,7 @@ const uploadPreview = uploadForm.querySelector('.img-upload__preview');
 const DEFAULT_STEP = 0.1;
 
 function createSlider() {
+  sliderContainer.classList.add('hidden');
   noUiSlider.create(slider, {
     range: {
       min: 0,
@@ -19,8 +20,7 @@ function createSlider() {
     },
     step: DEFAULT_STEP,
     start: 1,
-    format:
-    {
+    format:{
       to: function (value) {
         if (Number.isInteger(value)) {
           return value.toFixed(0);
@@ -42,29 +42,32 @@ function sliderToValue (target){
   sliderValue.value = slider.noUiSlider.get();
   uploadPreview.style.filter = EFFECTS[target].effect(sliderValue.value);
   console.log(uploadPreview.style.filter);
+
 }
 
 
 effectsContainer.addEventListener('change', (evt) => {
   const effectTarget = evt.target.value;
+  slider.noUiSlider.off('update', sliderUpdate);
+
   if(evt.target.value === 'none') {
     sliderContainer.classList.add('hidden');
+    uploadPreview.style.removeProperty('filter');
+    return;
   }
-
-  slider.noUiSlider.off('update', sliderUpdate);
+  if (sliderContainer.classList.contains(('hidden'))) {
+    sliderContainer.classList.remove('hidden');
+  }
+  uploadPreview.style.filter = EFFECTS[effectTarget].effect(EFFECTS[effectTarget].range.max);
 
 
   function sliderUpdate() {
     sliderToValue(effectTarget);
   }
 
-  const effectStartValue = EFFECTS[effectTarget].range.max;
-  uploadPreview.style.filter = '';
-  uploadPreview.style.filter = EFFECTS[effectTarget].effect(effectStartValue);
-
   slider.noUiSlider.updateOptions({
     range: EFFECTS[effectTarget].range,
-    start: effectStartValue,
+    start: EFFECTS[effectTarget].range.max,
     step: (effectTarget !== 'marvin') ? DEFAULT_STEP : EFFECTS[effectTarget].step,
   });
 
