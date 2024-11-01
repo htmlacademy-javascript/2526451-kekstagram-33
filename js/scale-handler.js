@@ -10,7 +10,7 @@ const SCALE_RULES = {
   minPictureSize: 0.25
 };
 const scaleValue = Number((scaleValueInput.value).replace('%',''));
-let scaleNewValue = (scaleValue / 100);
+let scaleNewValue = (scaleValue / 100).toFixed(3);
 
 scaleContainer.addEventListener('click', (evt) =>{
   if (evt.target === scaleValueInput){
@@ -28,6 +28,6 @@ scaleContainer.addEventListener('click', (evt) =>{
 
   preiewImage.style.transform = `scale(${scaleNewValue})`;
 
-  scaleValueInput.value = `${scaleNewValue * 100}%`;
+  scaleValueInput.value = `${(scaleNewValue * 100).toFixed(0)}%`;
 });
 
