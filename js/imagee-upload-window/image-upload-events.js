@@ -1,9 +1,11 @@
-import {isEscapeKey} from './util.js';
-import { createSlider,destroySlider } from './slider/slider.js';
+import {isEscapeKey} from '../util.js';
 // import {pictures} from './generate-pictures.js';
-import {addListner,removeListner} from './big-picture-events.js';
+import {addListner,removeListner} from '../big-picture-events.js';
 
-import {hashtagsInput,comment} from'./validation/validator.js';
+import { createSlider,defaultSliderValue } from './slider/slider.js';
+import {defaultFormValues,hashtagsInput,comment} from'./validation/validator.js';
+import {deafultImgScaleValues} from'./scale-handler.js';
+
 const uploadFile = document.querySelector('.img-upload__input');
 const uploadOverlay = document.querySelector('.img-upload__overlay');
 const overlayCloseButton = uploadOverlay.querySelector('.img-upload__cancel');
@@ -35,13 +37,12 @@ function closeModalWindow () {
 
   document.removeEventListener('keydown', onDocumentKeydown);
   addListner();
-
-  comment.value = '';
-  hashtagsInput.value = '';
-  destroySlider();
+  deafultImgScaleValues();
+  defaultFormValues();
+  defaultSliderValue();
 }
 // openModalWindow();
 uploadFile.addEventListener('click', openModalWindow);
 overlayCloseButton.addEventListener('click', closeModalWindow) ;
 
-export{uploadOverlay,};
+// export{uploadOverlay,};

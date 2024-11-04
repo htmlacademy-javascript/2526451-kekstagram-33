@@ -34,6 +34,12 @@ function validateCommentinput (value) {
   return true;
 }
 
+function defaultFormValues () {
+  hashtagsInput.value = '';
+  comment.value = '';
+}
+
+
 hashtagsPristneValidator.addValidator(hashtagsInput, validateHashtagsInput);
 hashtagsPristneValidator.addValidator(comment, validateCommentinput);
 
@@ -44,4 +50,4 @@ uploadForm.addEventListener('submit', (evt) => {
   	/* eslint-enable */
 });
 
-export {hashtagsInput,uploadForm,comment};
+export {defaultFormValues,uploadForm,hashtagsInput,comment};
