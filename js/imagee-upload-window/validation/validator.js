@@ -6,9 +6,9 @@ const uploadForm = imgUpload.querySelector('.img-upload__form');
 const hashtagsInput = uploadForm.querySelector('.text__hashtags');
 const comment = uploadForm.querySelector('.text__description');
 // попробуй потом без разделить условия и отдельно прописать события всплывашки
-const hashtagsPristneValidator = new Pristine(uploadForm);
+const pristine = new Pristine(uploadForm);
 // захочешь потом можно добавить все описания
-// не забудь массивы удалять или смотреть за ними
+// не забудь массивы удалять смотреть за ними
 
 function validateHashtagsInput(value) {
   if (value) {
@@ -17,7 +17,6 @@ function validateHashtagsInput(value) {
     const allHashtagsRegularValid = validateAllhashtags(hastTagsArray);
     const noneDuplicates = hasDuplicateHashtags(hastTagsArray);
     const maxHashtagsValid = maxHashtagsValidation(hastTagsArray, MAX_HASHTAGS);
-
 
     return allHashtagsRegularValid && noneDuplicates && maxHashtagsValid;
   }
@@ -40,14 +39,32 @@ function defaultFormValues () {
 }
 
 
-hashtagsPristneValidator.addValidator(hashtagsInput, validateHashtagsInput);
-hashtagsPristneValidator.addValidator(comment, validateCommentinput);
+pristine.addValidator(hashtagsInput, validateHashtagsInput);
+pristine.addValidator(comment, validateCommentinput);
 
-uploadForm.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-  /* eslint-disable */
-  console.log(validateHashtagsInput(hashtagsInput.value));
+function setUserFormSubmit (onSuccess) {
+
+  uploadForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    /* eslint-disable */
+
+
+
   	/* eslint-enable */
-});
+    const isValid = pristine.validate();
+    console.log(isValid);
+    if (isValid) {
+      const formData = new FormData(evt.target);
 
-export {defaultFormValues,uploadForm,hashtagsInput,comment};
+      fetch('https://32.javascript.htmlacademy.pro/kekstagram',
+        {
+          method:'POST',
+          body: formData,
+        }
+      ).then(() => onSuccess());
+    }
+
+  });
+}
+
+export {defaultFormValues, setUserFormSubmit, uploadForm,hashtagsInput,comment};

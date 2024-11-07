@@ -41,8 +41,8 @@ function closeModalWindow () {
   defaultFormValues();
   defaultSliderValue();
 }
-// openModalWindow();
+
 uploadFile.addEventListener('click', openModalWindow);
 overlayCloseButton.addEventListener('click', closeModalWindow) ;
 
-// export{uploadOverlay,};
+export { closeModalWindow, openModalWindow};

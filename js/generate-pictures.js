@@ -1,4 +1,4 @@
-import {photoDataPromise} from './get-photo-data.js';
+import {photoDataPromise} from './data-fetcher.js';
 const pictureTemplate = document.querySelector('#picture').content;
 const pictures = document.querySelector('.pictures');
 
