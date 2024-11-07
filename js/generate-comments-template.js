@@ -1,4 +1,4 @@
-import { photoDataArray } from './data.js';
+import { photoDataArray } from './get-photo-data.js';
 
 const newCommentArea = document.querySelector('.social__comments');
 const commentContainer = document.createDocumentFragment();
