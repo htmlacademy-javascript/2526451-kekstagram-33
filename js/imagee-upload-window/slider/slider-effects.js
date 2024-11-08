@@ -1,11 +1,11 @@
-const chrome = {
+const chromeEffect = {
   effect: (value) => `grayscale(${value})`,
   range: {
     min: 0,
     max: 1,
   }
 };
-const sepia = {
+const sepiaEffect = {
   effect:(value) => `sepia(${value})`,
   range: {
     min: 0,
@@ -13,7 +13,7 @@ const sepia = {
   }
 };
 
-const marvin = {
+const marvinEffect = {
   effect:(value) => `invert(${value}%)`,
   range: {
     min: 0,
@@ -23,7 +23,7 @@ const marvin = {
 };
 
 
-const phobos = {
+const phobosEffect = {
   effect:(value) => `blur(${value}px)`,
   range: {
     min: 0,
@@ -31,7 +31,7 @@ const phobos = {
   }
 };
 
-const heat = {
+const heatEffect = {
   effect:(value) => `brightness(${value})`,
   range: {
     min: 1,
@@ -40,11 +40,11 @@ const heat = {
 };
 
 const EFFECTS = {
-  chrome: chrome,
-  sepia: sepia,
-  marvin: marvin,
-  phobos: phobos,
-  heat: heat,
+  chrome: chromeEffect,
+  sepia: sepiaEffect,
+  marvin: marvinEffect,
+  phobos: phobosEffect,
+  heat: heatEffect,
 };
 
 export {EFFECTS};

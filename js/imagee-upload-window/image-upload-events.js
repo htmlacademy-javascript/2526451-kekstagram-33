@@ -3,8 +3,11 @@ import {isEscapeKey} from '../util.js';
 import {addListner,removeListner} from '../big-picture-events.js';
 
 import { createSlider,defaultSliderValue } from './slider/slider.js';
-import {defaultFormValues,hashtagsInput,comment} from'./validation/validator.js';
+import {defaultFormValues, blockEscKeyDownEvent} from'./validation/validator.js';
 import {deafultImgScaleValues} from'./scale-handler.js';
+
+import {setUserFormSubmit} from'./validation/validator';
+
 
 const uploadFile = document.querySelector('.img-upload__input');
 const uploadOverlay = document.querySelector('.img-upload__overlay');
@@ -14,9 +17,8 @@ const body = document.body;
 const onDocumentKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
-    if (document.activeElement !== hashtagsInput && document.activeElement !== comment) {
-      closeModalWindow();
-    }
+
+    blockEscKeyDownEvent(closeModalWindow);
   }
 };
 
@@ -36,13 +38,14 @@ function closeModalWindow () {
   body.classList.remove('modal-open');
 
   document.removeEventListener('keydown', onDocumentKeydown);
+  // че за листнер.. потом разберись при шлифовке.
   addListner();
   deafultImgScaleValues();
   defaultFormValues();
   defaultSliderValue();
 }
 
+setUserFormSubmit(closeModalWindow);
+
 uploadFile.addEventListener('click', openModalWindow);
 overlayCloseButton.addEventListener('click', closeModalWindow) ;
-
-export { closeModalWindow, openModalWindow};

@@ -1,13 +1,39 @@
 
-const SERVER_URL = 'https://32.javascript.htmlacademy.pro/kekstagram/data';
+const SERVER_URL = 'https://32.javascript.htmlacademy.pro/kekstagram';
 
-let photoDataArray = [];
+const photoDataArray = [];
 
-const photoDataPromise = fetch(SERVER_URL)
+const photoDataPromise = fetch(`${SERVER_URL }/data`,
+  {
+    method:'GET'
+  }
+)
   .then((response) => response.json());
 
-photoDataPromise.then((data) => {
-  photoDataArray = data;
+await photoDataPromise.then((photoData) => {
+  for (let i = 0; i < photoData.length; i++) {
+    photoDataArray.push(photoData[i]);
+  }
 });
 
-export {photoDataArray,photoDataPromise};
+function sendData (onSuccess, onFail, body){
+  fetch(SERVER_URL,
+    {
+      method:'POST',
+      body,
+    }
+  ).then((response) => {
+    if (response.ok) {
+      onSuccess();
+    } else {
+      onFail('ошибка');
+    }
+  })
+    .catch(() => {
+      onFail('ошибка');
+    });
+
+}
+
+
+export {photoDataArray,photoDataPromise,sendData};

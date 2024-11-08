@@ -1,11 +1,17 @@
 import {MAX_HASHTAGS,validateAllhashtags,hasDuplicateHashtags,maxHashtagsValidation} from'./validation-checks.js';
+import {sendData} from'../../data-fetcher.js';
+import {sendDataErrorModalShownEvent, sendDataSuccessModalShownEvent} from'./server-submit-modal-window.js';
+
 
 const imgUpload = document.querySelector('.img-upload');
 const uploadForm = imgUpload.querySelector('.img-upload__form');
 
 const hashtagsInput = uploadForm.querySelector('.text__hashtags');
 const comment = uploadForm.querySelector('.text__description');
-// попробуй потом без разделить условия и отдельно прописать события всплывашки
+
+const submitBtn = uploadForm.querySelector('.img-upload__submit');
+// попробуй потом разделить условия и отдельно прописать события всплывашки
+
 const pristine = new Pristine(uploadForm);
 // захочешь потом можно добавить все описания
 // не забудь массивы удалять смотреть за ними
@@ -38,33 +44,59 @@ function defaultFormValues () {
   comment.value = '';
 }
 
+function blockEscKeyDownEvent (eventToBlock) {
+  if (document.activeElement !== hashtagsInput && document.activeElement !== comment) {
+    eventToBlock();
+  }
+  if (!sendDataErrorModalShownEvent) {
+    eventToBlock();
+    // console.log(sendDataErrorModalShownEvent());
+    // console.log(sendDataSuccessModalShownEvent());
+  }
+}
 
 pristine.addValidator(hashtagsInput, validateHashtagsInput);
 pristine.addValidator(comment, validateCommentinput);
+
+function blockSubmitBtn () {
+  submitBtn.disabled = true;
+  // замути таймаут позже
+  submitBtn.textContent = 'Отправка...';
+}
+function unblockSubmitBtn () {
+  submitBtn.disabled = false;
+  submitBtn.textContent = 'Опубликовать';
+}
+
 
 function setUserFormSubmit (onSuccess) {
 
   uploadForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
-    /* eslint-disable */
-
-
-
-  	/* eslint-enable */
     const isValid = pristine.validate();
-    console.log(isValid);
-    if (isValid) {
-      const formData = new FormData(evt.target);
-
-      fetch('https://32.javascript.htmlacademy.pro/kekstagram',
-        {
-          method:'POST',
-          body: formData,
-        }
-      ).then(() => onSuccess());
+    //отрицание
+    if (!isValid) {
+      console.log(isValid);
+      blockSubmitBtn();
+      sendData(
+        // onSuccess
+        () => {
+          onSuccess();
+          sendDataSuccessModalShownEvent();
+          unblockSubmitBtn();
+        },
+        // fail
+        () => {
+          sendDataErrorModalShownEvent();
+          unblockSubmitBtn();
+        },
+        // body
+        new FormData(evt.target)
+      );
     }
+  }
 
-  });
+  );
 }
 
-export {defaultFormValues, setUserFormSubmit, uploadForm,hashtagsInput,comment};
+export {defaultFormValues, setUserFormSubmit, uploadForm, blockEscKeyDownEvent, hashtagsInput};

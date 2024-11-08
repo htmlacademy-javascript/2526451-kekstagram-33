@@ -71,7 +71,10 @@ effectsContainer.addEventListener('change', (evt) => {
 });
 
 function destroySlider() {
+  // if (slider.noUiSlider) {
+  // console.log(slider.noUiSlider);
   slider.noUiSlider.destroy();
+  // }
 }
 
 

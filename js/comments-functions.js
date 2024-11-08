@@ -1,5 +1,6 @@
 
 import {commentsLoader, getCommentsList, commentShownCount} from './big-picture-events.js';
+
 const INITIAL_COMMENTS_TO_SHOW = 5;
 let displayedCommentsCount = INITIAL_COMMENTS_TO_SHOW;
 
