@@ -32,17 +32,19 @@ function openModalWindow (evt) {
   createSlider();
 }
 
-function closeModalWindow () {
-  uploadOverlay.classList.add('hidden');
+function closeModalWindow (stopEvent) {
+  if (!stopEvent) {
+    uploadOverlay.classList.add('hidden');
 
-  body.classList.remove('modal-open');
+    body.classList.remove('modal-open');
 
-  document.removeEventListener('keydown', onDocumentKeydown);
-  // че за листнер.. потом разберись при шлифовке.
-  addListner();
-  deafultImgScaleValues();
-  defaultFormValues();
-  defaultSliderValue();
+    document.removeEventListener('keydown', onDocumentKeydown);
+    // че за листнер.. потом разберись при шлифовке.
+    addListner();
+    deafultImgScaleValues();
+    defaultFormValues();
+    defaultSliderValue();
+  }
 }
 
 setUserFormSubmit(closeModalWindow);

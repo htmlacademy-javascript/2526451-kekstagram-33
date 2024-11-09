@@ -46,12 +46,10 @@ function defaultFormValues () {
 
 function blockEscKeyDownEvent (eventToBlock) {
   if (document.activeElement !== hashtagsInput && document.activeElement !== comment) {
-    eventToBlock();
+    eventToBlock(true);
   }
   if (!sendDataErrorModalShownEvent) {
-    eventToBlock();
-    // console.log(sendDataErrorModalShownEvent());
-    // console.log(sendDataSuccessModalShownEvent());
+    eventToBlock(true);
   }
 }
 

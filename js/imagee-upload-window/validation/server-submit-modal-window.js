@@ -1,11 +1,9 @@
-const errorTemplate = document.querySelector('#error').content.cloneNode(true);
 
-const errorTemplateSection = errorTemplate.querySelector('.error');
-const errorTemplateBtn = errorTemplate.querySelector('.error__button');
-
+import {isEscapeKey} from '../../util.js';
 
 const successTemplate = document.querySelector('#success').content.cloneNode(true);
-const successTemplateBtn = successTemplate.querySelector('.success__button');
+
+// const successTemplateBtn = successTemplate.querySelector('.success__button');
 
 
 // function opacityAnimationShown (element) {
@@ -16,10 +14,35 @@ const successTemplateBtn = successTemplate.querySelector('.success__button');
 //   }, 1);
 // }
 
+function closeSendDataAlert(alertWindow) {
+  alertWindow.remove();
+}
+
+const onDocumentKeydown = (evt) => {
+  if (isEscapeKey(evt)) {
+    evt.preventDefault();
+
+    closeSendDataAlert(errorTemplateSection);
+
+    document.removeEventListener('keydown', keydownHandler);
+  }
+};
 
 function sendDataErrorModalShownEvent (){
+  const errorTemplate = document.querySelector('#error').content.cloneNode(true);
+
+  const errorTemplateSection = errorTemplate.querySelector('.error');
+  const errorTemplateBtn = errorTemplate.querySelector('.error__button');
+
   document.body.appendChild(errorTemplate);
+
   // opacityAnimationShown(errorTemplateSection);
+
+  errorTemplateBtn.addEventListener('click',()=> {
+    closeSendDataAlert(errorTemplateSection);
+  });
+  document.addEventListener('keydown', keydownHandler);
+
   return true;
 }
 
