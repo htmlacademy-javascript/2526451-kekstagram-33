@@ -1,6 +1,6 @@
 import {MAX_HASHTAGS,validateAllhashtags,hasDuplicateHashtags,maxHashtagsValidation} from'./validation-checks.js';
 import {sendData} from'../../data-fetcher.js';
-import {sendDataErrorModalShownEvent, sendDataSuccessModalShownEvent} from'./server-submit-modal-window.js';
+import {showErrorSuccessModal} from'./error-success-modal.js';
 
 
 const imgUpload = document.querySelector('.img-upload');
@@ -10,11 +10,9 @@ const hashtagsInput = uploadForm.querySelector('.text__hashtags');
 const comment = uploadForm.querySelector('.text__description');
 
 const submitBtn = uploadForm.querySelector('.img-upload__submit');
-// попробуй потом разделить условия и отдельно прописать события всплывашки
 
 const pristine = new Pristine(uploadForm);
-// захочешь потом можно добавить все описания
-// не забудь массивы удалять смотреть за ними
+
 
 function validateHashtagsInput(value) {
   if (value) {
@@ -44,13 +42,9 @@ function defaultFormValues () {
   comment.value = '';
 }
 
-function blockEscKeyDownEvent (eventToBlock) {
-  if (document.activeElement !== hashtagsInput && document.activeElement !== comment) {
-    eventToBlock(true);
-  }
-  if (!sendDataErrorModalShownEvent) {
-    eventToBlock(true);
-  }
+function blockEscKeyDownEvent () {
+  const isActive = document.activeElement === hashtagsInput || document.activeElement === comment;
+  return isActive;
 }
 
 pristine.addValidator(hashtagsInput, validateHashtagsInput);
@@ -66,26 +60,23 @@ function unblockSubmitBtn () {
   submitBtn.textContent = 'Опубликовать';
 }
 
-
-function setUserFormSubmit (onSuccess) {
-
+function setUserFormSubmit () {
   uploadForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
     const isValid = pristine.validate();
     //отрицание
     if (!isValid) {
-      console.log(isValid);
+      // console.log(isValid);
       blockSubmitBtn();
       sendData(
         // onSuccess
         () => {
-          onSuccess();
-          sendDataSuccessModalShownEvent();
+          showErrorSuccessModal('#success');
           unblockSubmitBtn();
         },
         // fail
         () => {
-          sendDataErrorModalShownEvent();
+          showErrorSuccessModal('#error');
           unblockSubmitBtn();
         },
         // body

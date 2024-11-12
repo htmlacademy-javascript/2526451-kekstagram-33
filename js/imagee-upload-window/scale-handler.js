@@ -31,10 +31,10 @@ scaleContainer.addEventListener('click', (evt) =>{
   scaleValueInput.value = `${(scaleNewValue * 100).toFixed(0)}%`;
 });
 
-function deafultImgScaleValues() {
+function defaultImgScaleValues() {
   previewImage.style.transform = `scale(${1})`;
   scaleValueInput.value = `${(100)}%`;
   scaleNewValue = 1;
 }
 
-export {deafultImgScaleValues};
+export {defaultImgScaleValues};

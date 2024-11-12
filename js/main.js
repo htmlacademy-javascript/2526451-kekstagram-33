@@ -13,7 +13,7 @@ import './imagee-upload-window/slider/slider.js';
 import './imagee-upload-window/slider/slider-effects.js';
 
 import './imagee-upload-window/validation/validator.js';
-import './imagee-upload-window/validation/server-submit-modal-window.js';
+import './imagee-upload-window/validation/error-success-modal.js';
 import './imagee-upload-window/validation/hashtags-formatter.js';
 
 import './imagee-upload-window/scale-handler.js';
