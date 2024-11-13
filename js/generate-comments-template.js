@@ -1,13 +1,13 @@
-import { photoDataArray } from './data.js';
+import { photoDataArray } from './data-fetcher.js';
 
 const newCommentArea = document.querySelector('.social__comments');
+
 const commentContainer = document.createDocumentFragment();
 
-
 function generateComments (pictureSrc) {
+  newCommentArea.innerHTML = '';
 
-  // упрости перепиши
-  // все таки на ID перепиши
+  // все таки на ID перепиши...?
   const formattedPath = pictureSrc.substring(pictureSrc.indexOf('photos/'));
   const pictureData = photoDataArray.find((imgUrl) => imgUrl.url === formattedPath);
 
@@ -30,7 +30,7 @@ function generateComments (pictureSrc) {
 
     commentContainer.appendChild(newCommentTemplate);
   });
-  newCommentArea.innerHTML = '';
+
 
   newCommentArea.appendChild(commentContainer);
 }
