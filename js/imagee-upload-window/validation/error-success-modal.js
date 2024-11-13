@@ -27,7 +27,7 @@ function showErrorSuccessModal (status) {
   const { allertbtn, allertSection } = getWindow(status);
 
   document.body.appendChild(allertSection);
-
+  // надо тут
   if (allertSection.classList.contains('hidden')) {
     allertSection.classList.remove('hidden');
   }

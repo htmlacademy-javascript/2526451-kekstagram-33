@@ -15,13 +15,12 @@ const overlayCloseButton = uploadOverlay.querySelector('.img-upload__cancel');
 const body = document.body;
 
 const onDocumentKeydown = (evt) => {
-  evt.preventDefault();
   if (isEscapeKey(evt)) {
+    evt.preventDefault();
     if (blockEscKeyDownEvent()) {
       return;
     }
     closeModalWindow();
-
   }
 };
 
@@ -34,8 +33,6 @@ function openModalWindow (evt) {
   document.addEventListener('keydown', onDocumentKeydown);
   createSlider();
 }
-// сеттер ...
-setUserFormSubmit();
 
 function closeModalWindow () {
 
@@ -52,6 +49,8 @@ function closeModalWindow () {
 
 }
 
+// сеттер ...
+setUserFormSubmit(closeModalWindow);
 
 uploadFile.addEventListener('click', openModalWindow);
 overlayCloseButton.addEventListener('click', closeModalWindow) ;
