@@ -1,11 +1,12 @@
 // порядок поправь
+import './data-fetcher.js';
+
 import './generate-pictures.js';
 import './generate-comments-template.js';
 import './big-picture-events.js';
 import './comments-functions.js';
 import './util.js';
 //дата
-import './data-fetcher.js';
 //форма
 import './imagee-upload-window/image-upload-events.js';
 
