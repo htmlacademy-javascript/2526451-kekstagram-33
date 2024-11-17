@@ -26,4 +26,4 @@ function generatePictures (photoDataArray) {
 
 photoDataPromise.then((photoData) => generatePictures(photoData));
 
-export {pictures};
+export {pictures,generatePictures};
