@@ -6,7 +6,7 @@ import { createSlider,defaultSliderValue } from './slider/slider.js';
 import {defaultFormValues, blockEscKeyDownEvent} from'./validation/validator.js';
 import {defaultImgScaleValues} from'./scale-handler.js';
 
-import {setUserFormSubmit} from'./validation/validator';
+import {setUserFormSubmit} from'./validation/validator.js';
 
 
 const uploadFile = document.querySelector('.img-upload__input');

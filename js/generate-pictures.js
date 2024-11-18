@@ -1,4 +1,5 @@
 import {photoDataPromise} from './data-fetcher.js';
+import {sortMenu} from './sort.js';
 const pictureTemplate = document.querySelector('#picture').content;
 const pictures = document.querySelector('.pictures');
 
@@ -24,6 +25,9 @@ function generatePictures (photoDataArray) {
   pictures.appendChild(pictureContainer);
 }
 
-photoDataPromise.then((photoData) => generatePictures(photoData));
+photoDataPromise.then((photoData) => generatePictures(photoData)).then (() => {
+  sortMenu.classList.remove('img-filters--inactive');
+}
+);
 
-export {pictures};
+export {pictures,generatePictures};
