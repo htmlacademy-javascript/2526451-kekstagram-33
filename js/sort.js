@@ -1,16 +1,15 @@
 import {generatePictures,pictures} from'./generate-pictures.js';
 import {photoDataArray} from'./data-fetcher.js';
-// import {getRandomInteger} from'./util.js';
 
 const sortMenu = document.querySelector('.img-filters');
+
 const formFilter = sortMenu.querySelector('.img-filters__form');
 const [deffaultBtn, randomBtn, popularBtn] = formFilter.children;
-
 
 const RANDOM_PICTURES_COUNT = 10;
 
 const mostPopularArray = photoDataArray.slice();
-// const tenRandomPicturesArray = photoDataArray.slice();
+
 
 function comparePopular (a,b) {
   return b.comments.length - a.comments.length;
@@ -32,6 +31,7 @@ function showDeafaultPictures(evt) {
 }
 
 function showPopularPictures(evt) {
+
   deffaultBtn.classList.remove('img-filters__button--active');
   randomBtn.classList.remove('img-filters__button--active');
 
@@ -64,7 +64,6 @@ function showTenRandomPictures(evt) {
 
   generatePictures(shuffle(photoDataArray));
 }
-
 
 popularBtn.addEventListener('click', showPopularPictures);
 deffaultBtn.addEventListener('click', showDeafaultPictures);
