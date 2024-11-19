@@ -1,9 +1,8 @@
 import {openModalWindow} from'./form-events.js';
-// import {uploadForm} from'./validation/validator.js';
+import {uploadForm} from'./form.js';
 
-const fileChooser = document.querySelector('.img-upload input[type="file"]');
-// костыль;
-const preview = document.querySelector('.img-upload__preview img');
+const fileChooser = uploadForm.querySelector('.img-upload input[type="file"]');
+const preview = uploadForm.querySelector('.img-upload__preview img');
 
 const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 

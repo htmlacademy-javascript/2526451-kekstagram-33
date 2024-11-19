@@ -26,7 +26,8 @@ function getWindow(sentDataStatus) {
   const allertTemplate = document.querySelector(sentDataStatus).content.cloneNode(true);
 
   const [allertSection] = allertTemplate.children;
-  const [allertModalDiv, , allertBtn] = allertSection.children;
+  const [allertModalDiv] = allertSection.children;
+  const [,allertBtn] = allertModalDiv.children;
 
   allertSection.addEventListener('click' , (evt) => {
     if (evt.target === allertBtn || !allertModalDiv.contains(evt.target)) {

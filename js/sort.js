@@ -60,7 +60,7 @@ function showPopularPictures(evt) {
 }
 
 
-function showTenRandomPictures(evt) {
+function showRandomPictures(evt) {
   buttonsActiveClassToggle(evt);
   deboucedGeneratePictures(shuffle(photoDataArray));
 }
@@ -68,7 +68,7 @@ function showTenRandomPictures(evt) {
 
 popularBtn.addEventListener('click', showPopularPictures);
 deffaultBtn.addEventListener('click', showDeafaultPictures);
-randomBtn.addEventListener('click', showTenRandomPictures);
+randomBtn.addEventListener('click', showRandomPictures);
 
 
 export {sortMenu};

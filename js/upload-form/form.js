@@ -1,12 +1,9 @@
-import {sendData,photoDataArray} from'../data-fetcher.js';
+import {sendData} from'../data-fetcher.js';
 import {validateHashtagsInput,getErrorsMessages} from'./validation/validation-checks.js';
 import {showErrorSuccessModal} from'./error-success-modal.js';
-import { preview,fileChooser } from './image-upload.js';
+import { fileChooser } from './image-upload.js';
 // переименнуй все красиво
-const imgUpload = document.querySelector('.img-upload');
-const uploadForm = imgUpload.querySelector('.img-upload__form');
-
-// костыль пока
+const uploadForm = document.querySelector('.img-upload__form');
 
 
 const hashtagsInput = uploadForm.querySelector('.text__hashtags');
@@ -16,7 +13,6 @@ const submitBtn = uploadForm.querySelector('.img-upload__submit');
 
 const MAX_COMMENTS_LENGTH = 140;
 
-// еще один ???
 const pristine = new Pristine(uploadForm,
   {
     classTo: 'img-upload__field-wrapper',
@@ -55,15 +51,6 @@ pristine.addValidator(comment, (value) =>
   value.length < MAX_COMMENTS_LENGTH,
 'Длина комментария больше 140 символов');
 
-function generateNewImageObject() {
-  const NewImageObject = {};
-  NewImageObject.id = photoDataArray.length;
-  NewImageObject.url = preview.src;
-  NewImageObject.likes = 0;
-  NewImageObject.comments = comment.value;
-  NewImageObject.description = hashtagsInput.value;
-}
-
 function setUserFormSubmit (closeModalWindow) {
   uploadForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
@@ -74,7 +61,6 @@ function setUserFormSubmit (closeModalWindow) {
       sendData(
         // onSuccess
         () => {
-          generateNewImageObject();
           showErrorSuccessModal('#success');
           unblockSubmitBtn();
           pristine.reset();
