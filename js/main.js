@@ -16,7 +16,7 @@ import './upload-form/slider/slider.js';
 import './upload-form/slider/slider-effects.js';
 import './upload-form/scale-handler.js';
 
-import './upload-form/validation/error-success-modal.js';
+import './upload-form/error-success-modal.js';
 import './upload-form/validation/hashtags-formatter.js';
 
 

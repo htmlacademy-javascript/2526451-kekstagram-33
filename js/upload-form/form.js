@@ -1,6 +1,6 @@
 import {sendData,photoDataArray} from'../data-fetcher.js';
 import {validateHashtagsInput,getErrorsMessages} from'./validation/validation-checks.js';
-import {showErrorSuccessModal} from'./validation/error-success-modal.js';
+import {showErrorSuccessModal} from'./error-success-modal.js';
 import { preview,fileChooser } from './image-upload.js';
 // переименнуй все красиво
 const imgUpload = document.querySelector('.img-upload');
