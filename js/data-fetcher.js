@@ -35,5 +35,4 @@ function sendData (onSuccess, onFail, body){
 
 }
 
-
 export {photoDataArray,photoDataPromise,sendData};

@@ -1,9 +1,13 @@
+import {sendData,photoDataArray} from'../../data-fetcher.js';
 import {validateHashtagsInput,getErrorsMessages} from'./validation-checks.js';
-import {sendData} from'../../data-fetcher.js';
 import {showErrorSuccessModal} from'./error-success-modal.js';
-
+import { preview,fileChooser } from '../image-upload.js';
+// переименнуй все красиво
 const imgUpload = document.querySelector('.img-upload');
 const uploadForm = imgUpload.querySelector('.img-upload__form');
+
+// костыль пока
+
 
 const hashtagsInput = uploadForm.querySelector('.text__hashtags');
 const comment = uploadForm.querySelector('.text__description');
@@ -28,6 +32,7 @@ const pristine = new Pristine(uploadForm,
 function defaultFormValues () {
   hashtagsInput.value = '';
   comment.value = '';
+  fileChooser.value = '';
 }
 
 function blockEscKeyDownEvent () {
@@ -40,6 +45,7 @@ function blockSubmitBtn () {
   // замути таймаут позже
   submitBtn.textContent = 'Отправка...';
 }
+
 function unblockSubmitBtn () {
   submitBtn.disabled = false;
   submitBtn.textContent = 'Опубликовать';
@@ -51,21 +57,27 @@ pristine.addValidator(comment, (value) =>
   value.length < MAX_COMMENTS_LENGTH,
 'Длина комментария больше 140 символов');
 
+function generateNewImageObject() {
+  const NewImageObject = {};
+  NewImageObject.id = photoDataArray.length;
+  NewImageObject.url = preview.src;
+  NewImageObject.likes = 0;
+  NewImageObject.comments = comment.value;
+  NewImageObject.description = hashtagsInput.value;
+}
+
 function setUserFormSubmit (closeModalWindow) {
   uploadForm.addEventListener('submit', (evt) => {
-
     evt.preventDefault();
 
-
     const isValid = pristine.validate();
-    // console.log(isValid);
-    //отрицание
     if (isValid) {
       // console.log(isValid);
       blockSubmitBtn();
       sendData(
         // onSuccess
         () => {
+          generateNewImageObject();
           showErrorSuccessModal('#success');
           unblockSubmitBtn();
           pristine.reset();
@@ -75,8 +87,6 @@ function setUserFormSubmit (closeModalWindow) {
         () => {
           showErrorSuccessModal('#error');
           unblockSubmitBtn();
-
-
         },
         // body
         new FormData(evt.target)
