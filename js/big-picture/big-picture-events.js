@@ -1,17 +1,15 @@
 import { isEscapeKey } from '../util.js';
 import {pictures} from '../generate-pictures.js';
 
-import {generateComments } from '../big-picture/generate-comments-template.js';
-import { hideCommentsOnLoadBigPicture,showNextComments , getCommentShownCount} from '../comments-functions.js';
+import {generateComments } from './generate-comments-template.js';
+import { hideCommentsOnLoadBigPicture,showNextComments , getCommentShownCount} from './comments-functions.js';
 
-// Окно
 const bigPictureWindow = document.querySelector('.big-picture');
 const commentShownCount = bigPictureWindow.querySelector('.social__comment-shown-count');
 
 
 const bigPictureWindowCloseBtn = bigPictureWindow.querySelector('.big-picture__cancel');
 const bigPictureImage = bigPictureWindow.querySelector('.big-picture__img').children[0];
-// Счетчики
 const likesCount = bigPictureWindow.querySelector('.likes-count');
 const commentsTotalCount = bigPictureWindow.querySelector('.social__comment-total-count');
 

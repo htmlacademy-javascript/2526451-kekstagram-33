@@ -5,7 +5,7 @@ import './util.js';
 import './generate-pictures.js';
 import './big-picture/big-picture-events.js';
 import './big-picture/generate-comments-template.js';
-import './comments-functions.js';
+import './big-picture/comments-functions.js';
 import './sort.js';
 
 import './upload-form/form-events.js';
