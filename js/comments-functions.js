@@ -1,5 +1,5 @@
 
-import {commentsLoader, getCommentsList, commentShownCount} from './big-picture-events.js';
+import {commentsLoader, getCommentsList, commentShownCount} from './big-picture/big-picture-events.js';
 
 const INITIAL_COMMENTS_TO_SHOW = 5;
 let displayedCommentsCount = INITIAL_COMMENTS_TO_SHOW;
@@ -15,7 +15,6 @@ function hideCommentsOnLoadBigPicture() {
 }
 
 function getCommentShownCount () {
-  // ох уж этот гет коментс...
   const commentsList = getCommentsList();
   if (commentsList.length < displayedCommentsCount) {
     commentShownCount.textContent = commentsList.length;

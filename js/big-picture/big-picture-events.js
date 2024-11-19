@@ -1,8 +1,8 @@
-import { isEscapeKey } from './util.js';
-import {pictures} from './generate-pictures.js';
+import { isEscapeKey } from '../util.js';
+import {pictures} from '../generate-pictures.js';
 
-import {generateComments } from './generate-comments-template.js';
-import { hideCommentsOnLoadBigPicture,showNextComments , getCommentShownCount} from './comments-functions.js';
+import {generateComments } from '../big-picture/generate-comments-template.js';
+import { hideCommentsOnLoadBigPicture,showNextComments , getCommentShownCount} from '../comments-functions.js';
 
 // Окно
 const bigPictureWindow = document.querySelector('.big-picture');
@@ -17,7 +17,6 @@ const commentsTotalCount = bigPictureWindow.querySelector('.social__comment-tota
 
 const pictureDescription = bigPictureWindow.querySelector('.social__caption');
 
-// посмотреть зачем тут такая функция , можно ли совместить на общее окно закрытия
 const onDocumentKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
@@ -63,12 +62,13 @@ function removeListner () {
 }
 function addListner () {
   pictures.addEventListener('click', onPictureClick);
-  pictures.addEventListener('click', hideCommentsOnLoadBigPicture);
+  // pictures.addEventListener('click', hideCommentsOnLoadBigPicture);
 }
 
 function onPictureClick (evt) {
 
   if (evt.target.nodeName === 'IMG') {
+    hideCommentsOnLoadBigPicture();
     const target = evt.target.parentElement;
 
     const [targetImage, { children: [newComentsCount, newLikesCount] }] = target.children;

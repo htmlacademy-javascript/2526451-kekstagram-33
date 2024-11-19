@@ -1,6 +1,6 @@
 
 import {isEscapeKey} from '../../util.js';
-import {onDocumentKeydown} from '../image-upload-events.js';
+import {onDocumentKeydown} from '../form-events.js';
 
 
 function onErrorSuccessModalKeydown (evt) {

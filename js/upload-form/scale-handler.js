@@ -1,4 +1,4 @@
-import { uploadForm } from './validation/validator.js';
+import { uploadForm } from './form.js';
 import { previewImage } from './slider/slider.js';
 const scaleContainer = uploadForm.querySelector('.img-upload__scale');
 const [zoomOutBtn, scaleValueInput, zoomInBtn] = scaleContainer.children;

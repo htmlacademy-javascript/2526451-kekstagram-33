@@ -1,4 +1,4 @@
-import { photoDataArray } from './data-fetcher.js';
+import { photoDataArray } from '../data-fetcher.js';
 
 const newCommentArea = document.querySelector('.social__comments');
 

@@ -1,5 +1,5 @@
-import {uploadForm} from'../validation/validator.js';
-import {EFFECTS} from'../slider/slider-effects.js';
+import {uploadForm} from'../form.js';
+import {EFFECTS} from'./slider-effects.js';
 
 const slider = uploadForm.querySelector('.effect-level__slider');
 const sliderValue = uploadForm.querySelector('.effect-level__value');

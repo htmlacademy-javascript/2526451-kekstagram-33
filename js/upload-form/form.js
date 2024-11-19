@@ -1,7 +1,7 @@
-import {sendData,photoDataArray} from'../../data-fetcher.js';
-import {validateHashtagsInput,getErrorsMessages} from'./validation-checks.js';
-import {showErrorSuccessModal} from'./error-success-modal.js';
-import { preview,fileChooser } from '../image-upload.js';
+import {sendData,photoDataArray} from'../data-fetcher.js';
+import {validateHashtagsInput,getErrorsMessages} from'./validation/validation-checks.js';
+import {showErrorSuccessModal} from'./validation/error-success-modal.js';
+import { preview,fileChooser } from './image-upload.js';
 // переименнуй все красиво
 const imgUpload = document.querySelector('.img-upload');
 const uploadForm = imgUpload.querySelector('.img-upload__form');
@@ -27,8 +27,6 @@ const pristine = new Pristine(uploadForm,
   }, false
 );
 
-// пока вопрос
-// / ресет пристин?
 function defaultFormValues () {
   hashtagsInput.value = '';
   comment.value = '';
@@ -72,7 +70,6 @@ function setUserFormSubmit (closeModalWindow) {
 
     const isValid = pristine.validate();
     if (isValid) {
-      // console.log(isValid);
       blockSubmitBtn();
       sendData(
         // onSuccess

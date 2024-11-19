@@ -1,4 +1,4 @@
-import {openModalWindow} from'./image-upload-events.js';
+import {openModalWindow} from'./form-events.js';
 // import {uploadForm} from'./validation/validator.js';
 
 const fileChooser = document.querySelector('.img-upload input[type="file"]');
