@@ -1,4 +1,4 @@
-import { isEscapeKey } from '../util.js';
+import { isEscapeKey,compensateOverflowPadding } from '../util.js';
 import {pictures} from '../generate-pictures.js';
 
 import {generateComments } from './generate-comments-template.js';
@@ -15,6 +15,8 @@ const commentsTotalCount = bigPictureWindow.querySelector('.social__comment-tota
 
 const pictureDescription = bigPictureWindow.querySelector('.social__caption');
 
+const commentsLoader = bigPictureWindow.querySelector('.comments-loader');
+
 const onDocumentKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
@@ -25,12 +27,11 @@ const onDocumentKeydown = (evt) => {
 function getCommentsList (){
   return bigPictureWindow.querySelectorAll('.social__comment');
 }
-// временно по переменнымю разберись потом по экспорту импорту
-
-const commentsLoader = bigPictureWindow.querySelector('.comments-loader');
-
 
 function openBigPictureWindow () {
+  compensateOverflowPadding(true);
+  const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
+  document.body.style.paddingRight = `${scrollBarWidth}px`;
 
   bigPictureWindow.classList.remove('hidden');
   document.body.classList.add('modal-open');
@@ -40,6 +41,7 @@ function openBigPictureWindow () {
 }
 
 function closeBigPictureWindow () {
+  compensateOverflowPadding(false);
   bigPictureWindow.classList.add('hidden');
   document.removeEventListener('keydown', onDocumentKeydown);
   document.body.classList.remove('modal-open');

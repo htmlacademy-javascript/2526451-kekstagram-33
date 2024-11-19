@@ -1,4 +1,4 @@
-import {isEscapeKey} from '../util.js';
+import {isEscapeKey, compensateOverflowPadding} from '../util.js';
 import {addListner,removeListner} from '../big-picture/big-picture-events.js';
 
 import { createSlider,defaultSliderValue } from './slider/slider.js';
@@ -24,6 +24,7 @@ const onDocumentKeydown = (evt) => {
 
 function openModalWindow () {
   // evt.preventDefault();
+  compensateOverflowPadding(true);
   uploadOverlay.classList.remove('hidden');
 
   document.body.classList.add('modal-open');
@@ -33,7 +34,7 @@ function openModalWindow () {
 }
 
 function closeModalWindow () {
-
+  compensateOverflowPadding(false);
   uploadOverlay.classList.add('hidden');
 
   document.body.classList.remove('modal-open');
