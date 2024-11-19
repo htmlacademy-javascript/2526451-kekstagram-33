@@ -25,12 +25,11 @@ function onErrorSuccessModalKeydown (evt) {
 function getWindow(sentDataStatus) {
   const allertTemplate = document.querySelector(sentDataStatus).content.cloneNode(true);
 
-  const allertSection = allertTemplate.children[0];
-  const allertModalDiv = allertSection.children[0];
-  const allertbtn = allertModalDiv.children[1];
+  const [allertSection] = allertTemplate.children;
+  const [allertModalDiv, , allertBtn] = allertSection.children;
 
   allertSection.addEventListener('click' , (evt) => {
-    if (evt.target === allertbtn || !allertModalDiv.contains(evt.target)) {
+    if (evt.target === allertBtn || !allertModalDiv.contains(evt.target)) {
       closeAllertModal();
     }
   });
