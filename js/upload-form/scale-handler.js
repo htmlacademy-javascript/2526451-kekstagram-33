@@ -29,6 +29,9 @@ scaleContainer.addEventListener('click', (evt) =>{
   previewImage.style.transform = `scale(${scaleNewValue})`;
 
   scaleValueInput.value = `${(scaleNewValue * 100).toFixed(0)}%`;
+  scaleValueInput.setAttribute('value', scaleValueInput.value); //cypress ругается
+  console.log(scaleValueInput.value);
+  console.log(scaleValueInput);
 });
 
 function defaultImgScaleValues() {

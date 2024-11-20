@@ -1,14 +1,12 @@
+import {photoDataPromise} from'./data-fetcher.js';
 import {generatePictures,pictures} from'./generate-pictures.js';
-import {photoDataArray} from'./data-fetcher.js';
 
-const sortMenu = document.querySelector('.img-filters');
 
-const formFilter = sortMenu.querySelector('.img-filters__form');
+const formFilter = document.querySelector('.img-filters__form');
 const [deffaultBtn, randomBtn, popularBtn] = formFilter.children;
 
 const RANDOM_PICTURES_COUNT = 10;
 
-const mostPopularArray = photoDataArray.slice();
 
 function buttonsActiveClassToggle(evt) {
   [...formFilter.children].forEach((button) => {
@@ -51,24 +49,38 @@ const deboucedGeneratePictures = debounce((array) => {
 
 function showDeafaultPictures(evt) {
   buttonsActiveClassToggle(evt);
-  deboucedGeneratePictures(photoDataArray);
+
+  photoDataPromise.then((photoData) => {
+
+    deboucedGeneratePictures(photoData);
+  });
+  // deboucedGeneratePictures(photoDataArray);
 }
 
 function showPopularPictures(evt) {
   buttonsActiveClassToggle(evt);
-  deboucedGeneratePictures(mostPopularArray.sort(comparePopular));
+
+  photoDataPromise.then((photoData) => {
+    const mostPopularArray = photoData.slice();
+
+    deboucedGeneratePictures(mostPopularArray.sort(comparePopular));
+  });
+
+
+  // deboucedGeneratePictures(mostPopularArray.sort(comparePopular));
 }
 
 
 function showRandomPictures(evt) {
   buttonsActiveClassToggle(evt);
-  deboucedGeneratePictures(shuffle(photoDataArray));
+
+  photoDataPromise.then((photoData) => {
+    const shuffledArray = shuffle(photoData);
+    deboucedGeneratePictures(shuffledArray);
+  });
 }
 
 
 popularBtn.addEventListener('click', showPopularPictures);
 deffaultBtn.addEventListener('click', showDeafaultPictures);
 randomBtn.addEventListener('click', showRandomPictures);
-
-
-export {sortMenu};
