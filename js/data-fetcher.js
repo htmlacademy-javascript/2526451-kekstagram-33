@@ -5,8 +5,6 @@ const errorTemplate = document.querySelector('#data-error').content;
 const TIMEOUT_DELETE_ERROR_SECTION = 5000;
 const SERVER_URL = 'https://32.javascript.htmlacademy.pro/kekstagram';
 
-// let photoDataArray = [];
-
 const photoDataPromise = fetch(`${SERVER_URL}/data`,
   {
     method:'GET'
@@ -16,15 +14,17 @@ const photoDataPromise = fetch(`${SERVER_URL}/data`,
 
 photoDataPromise
   .then((photoData) => {
-
-    // for (let i = 0; i < photoData.length; i++) {
-    //   photoDataArray.push(photoData[i]);
-
-    // }
     generatePictures(photoData);
     sortMenu.classList.remove('img-filters--inactive');
   })
   .catch(showErrorModal);
+
+let photoDataArray;
+
+
+photoDataPromise.then((data) => {
+  photoDataArray = data;
+});
 
 
 function sendData (onSuccess, onFail, body){
@@ -56,5 +56,5 @@ function showErrorModal() {
     document.body.lastChild.remove();
   }, TIMEOUT_DELETE_ERROR_SECTION);
 }
-export {photoDataPromise,sendData};
+export {photoDataPromise,sendData, photoDataArray};
 

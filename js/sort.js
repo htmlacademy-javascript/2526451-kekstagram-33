@@ -1,4 +1,4 @@
-import {photoDataPromise} from'./data-fetcher.js';
+import {photoDataArray} from'./data-fetcher.js';
 import {generatePictures,pictures} from'./generate-pictures.js';
 
 
@@ -50,34 +50,26 @@ const deboucedGeneratePictures = debounce((array) => {
 function showDeafaultPictures(evt) {
   buttonsActiveClassToggle(evt);
 
-  photoDataPromise.then((photoData) => {
+  // photoDataPromise.then((photoData) => {
 
-    deboucedGeneratePictures(photoData);
-  });
-  // deboucedGeneratePictures(photoDataArray);
+  //   deboucedGeneratePictures(photoData);
+  // });
+  deboucedGeneratePictures(photoDataArray);
 }
 
 function showPopularPictures(evt) {
   buttonsActiveClassToggle(evt);
+  const mostPopularArray = photoDataArray.slice();
 
-  photoDataPromise.then((photoData) => {
-    const mostPopularArray = photoData.slice();
-
-    deboucedGeneratePictures(mostPopularArray.sort(comparePopular));
-  });
-
-
-  // deboucedGeneratePictures(mostPopularArray.sort(comparePopular));
+  deboucedGeneratePictures(mostPopularArray.sort(comparePopular));
 }
 
 
 function showRandomPictures(evt) {
   buttonsActiveClassToggle(evt);
 
-  photoDataPromise.then((photoData) => {
-    const shuffledArray = shuffle(photoData);
-    deboucedGeneratePictures(shuffledArray);
-  });
+  const shuffledArray = shuffle(photoDataArray);
+  deboucedGeneratePictures(shuffledArray);
 }
 
 

@@ -17,6 +17,7 @@ function hasDuplicateHashtags(hashtagsArray) {
   return true;
 }
 
+// так так так
 function getErrorsMessages (){
   return errorMesage.join(', ');
 }

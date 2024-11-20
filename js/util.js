@@ -2,7 +2,7 @@
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
 
-// при открытом моальном окне прячется скролбар и появялет сдвиг. глаз режет.
+// При открытом модальном окне прячется скроллбар и появляется сдвиг. Глаз режет
 function compensateOverflowPadding(modalShown) {
   // ширина вьюпорта - ширина контента вот и полоса
   const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
