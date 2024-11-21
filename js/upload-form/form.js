@@ -1,7 +1,7 @@
 import {sendData} from'../data-fetcher.js';
 import {validateHashtagsInput,getErrorsMessages,cleanErrorsMessages} from'./validation/validation-checks.js';
 import {showErrorSuccessModal} from'./error-success-modal.js';
-import { fileChooser } from './image-upload.js';
+import { fileChooser } from './file-chooser.js';
 // переименнуй все красиво
 const uploadForm = document.querySelector('.img-upload__form');
 
@@ -57,7 +57,6 @@ function setUserFormSubmit (closeModalWindow) {
 
     const isValid = pristine.validate();
     if (isValid) {
-      cleanErrorsMessages();
       blockSubmitBtn();
       sendData(
         // onSuccess
@@ -76,12 +75,14 @@ function setUserFormSubmit (closeModalWindow) {
         new FormData(evt.target)
       );
     } else {
+      cleanErrorsMessages();
       submitBtn.addEventListener('focusout', () => {
         pristine.reset();
       });
     }
   }
   );
+
 }
 
 export {defaultFormValues, setUserFormSubmit, uploadForm, blockEscKeyDownEvent, hashtagsInput};
