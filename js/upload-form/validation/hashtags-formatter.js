@@ -1,4 +1,4 @@
-import {hashtagsInput} from'./validator.js';
+import {hashtagsInput} from'../form.js';
 
 function hashtagsFormatter(hashtTagsArray) {
   const newArray = [];

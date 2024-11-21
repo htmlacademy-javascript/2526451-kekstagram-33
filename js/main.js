@@ -1,23 +1,23 @@
-// порядок поправь
+
 import './data-fetcher.js';
+import './util.js';
+import './sort.js';
 
 import './generate-pictures.js';
-import './generate-comments-template.js';
-import './big-picture-events.js';
-import './comments-functions.js';
-import './util.js';
-//дата
-//форма
-import './imagee-upload-window/image-upload-events.js';
+import './big-picture/big-picture-events.js';
+import './big-picture/generate-comments-template.js';
+import './big-picture/comments-functions.js';
 
-import './imagee-upload-window/slider/slider.js';
-import './imagee-upload-window/slider/slider-effects.js';
+import './upload-form/file-chooser.js';
+import './upload-form/form.js';
+import './upload-form/form-events.js';
 
-import './imagee-upload-window/validation/validator.js';
-import './imagee-upload-window/validation/error-success-modal.js';
-import './imagee-upload-window/validation/hashtags-formatter.js';
-import './imagee-upload-window/image-upload.js';
+import './upload-form/slider/slider.js';
+import './upload-form/slider/slider-effects.js';
+import './upload-form/scale-handler.js';
 
-import './imagee-upload-window/scale-handler.js';
+import './upload-form/error-success-modal.js';
+import './upload-form/validation/hashtags-formatter.js';
+import './upload-form/validation/validation-checks.js';
 
-import './sort.js';
+
