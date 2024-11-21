@@ -15,7 +15,6 @@ function hideCommentsOnLoadBigPicture() {
 }
 
 function getCommentShownCount () {
-  // ох уж этот гет коментс...
   const commentsList = getCommentsList();
   if (commentsList.length < displayedCommentsCount) {
     commentShownCount.textContent = commentsList.length;
@@ -42,5 +41,4 @@ function showNextComments () {
     displayedCommentsCount = INITIAL_COMMENTS_TO_SHOW;
   }
 }
-// тернальный есть такой. не забывай
 export {hideCommentsOnLoadBigPicture, showNextComments , getCommentShownCount};

@@ -71,23 +71,20 @@
   height: 0;
 }
 
+
 .noUi-handle {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   position: absolute;
 }
 
+.noUi-handle:active {
+  cursor: grabbing;
+}
+
 .noUi-touch-area {
   height: 100%;
   width: 100%;
-}
-
-.noUi-touch-area:focus {
-  cursor: grab;
-}
-
-.noUi-touch-area:active {
-  cursor: grabbing;
 }
 
 .noUi-state-tap .noUi-connect,
@@ -185,6 +182,7 @@
 
 .noUi-handle:after {
   left: 17px;
+  cursor: inherit;
 }
 
 .noUi-vertical .noUi-handle:before,

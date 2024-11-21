@@ -1,4 +1,4 @@
-import { photoDataArray } from './data-fetcher.js';
+import { photoDataArray } from '../data-fetcher.js';
 
 const newCommentArea = document.querySelector('.social__comments');
 
@@ -7,8 +7,9 @@ const commentContainer = document.createDocumentFragment();
 function generateComments (pictureSrc) {
   newCommentArea.innerHTML = '';
 
-  // все таки на ID перепиши...?
   const formattedPath = pictureSrc.substring(pictureSrc.indexOf('photos/'));
+
+
   const pictureData = photoDataArray.find((imgUrl) => imgUrl.url === formattedPath);
 
   pictureData.comments.forEach ((comment) => {
@@ -30,7 +31,6 @@ function generateComments (pictureSrc) {
 
     commentContainer.appendChild(newCommentTemplate);
   });
-
 
   newCommentArea.appendChild(commentContainer);
 }
