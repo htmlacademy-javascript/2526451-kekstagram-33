@@ -1,5 +1,5 @@
 import {sendData} from'../data-fetcher.js';
-import {validateHashtagsInput,getErrorsMessages} from'./validation/validation-checks.js';
+import {validateHashtagsInput,getErrorsMessages,cleanErrorsMessages} from'./validation/validation-checks.js';
 import {showErrorSuccessModal} from'./error-success-modal.js';
 import { fileChooser } from './image-upload.js';
 // переименнуй все красиво
@@ -57,6 +57,7 @@ function setUserFormSubmit (closeModalWindow) {
 
     const isValid = pristine.validate();
     if (isValid) {
+      cleanErrorsMessages();
       blockSubmitBtn();
       sendData(
         // onSuccess
