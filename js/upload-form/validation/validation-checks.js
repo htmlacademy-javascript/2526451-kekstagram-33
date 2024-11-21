@@ -40,7 +40,6 @@ function validateHashtagsInput(value) {
       { isValid: maxHashtagsValid, message: 'превышено количество хэштегов' }
     ];
 
-    // errorMesage = [];
     hashtagsValidationArray.forEach(({isValid, message})=>{
       if (!isValid) {
         errorMesage.push(message);
