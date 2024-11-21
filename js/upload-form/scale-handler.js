@@ -1,5 +1,6 @@
 import { uploadForm } from './form.js';
 import { previewImage } from './slider/slider.js';
+
 const scaleContainer = uploadForm.querySelector('.img-upload__scale');
 const [zoomOutBtn, scaleValueInput, zoomInBtn] = scaleContainer.children;
 
@@ -30,8 +31,6 @@ scaleContainer.addEventListener('click', (evt) =>{
 
   scaleValueInput.value = `${(scaleNewValue * 100).toFixed(0)}%`;
   scaleValueInput.setAttribute('value', scaleValueInput.value); //cypress ругается
-  console.log(scaleValueInput.value);
-  console.log(scaleValueInput);
 });
 
 function defaultImgScaleValues() {

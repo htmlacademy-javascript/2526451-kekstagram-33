@@ -3,15 +3,7 @@ const pictures = document.querySelector('.pictures');
 
 const pictureContainer = document.createDocumentFragment();
 
-// console.log(photoDataArray);
-// function generatePhoto (photoDataArray) {
-
-
 function generatePictures (photoDataArray) {
-  if (!Array.isArray(photoDataArray)) {
-    return;
-  }
-
   photoDataArray.forEach((picture) => {
     const newPicture = pictureTemplate.cloneNode(true);
 

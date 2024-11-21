@@ -10,21 +10,23 @@ const photoDataPromise = fetch(`${SERVER_URL}/data`,
     method:'GET'
   }
 )
-  .then((response) => response.json());
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error(`Ошибка сети: ${response.status}`);
+    }
+    return response.json();
+  });
+
+let photoDataArray;
 
 photoDataPromise
   .then((photoData) => {
     generatePictures(photoData);
     sortMenu.classList.remove('img-filters--inactive');
+
+    photoDataArray = photoData;
   })
   .catch(showErrorModal);
-
-let photoDataArray;
-
-
-photoDataPromise.then((data) => {
-  photoDataArray = data;
-});
 
 
 function sendData (onSuccess, onFail, body){
@@ -39,10 +41,9 @@ function sendData (onSuccess, onFail, body){
     } else {
       onFail('ошибка');
     }
-  })
-    .catch(() => {
-      onFail('ошибка');
-    });
+  }) .catch(() => {
+    onFail('ошибка');
+  });
 
 }
 

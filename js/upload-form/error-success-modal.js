@@ -2,7 +2,6 @@
 import {isEscapeKey} from '../util.js';
 import {onDocumentKeydown} from './form-events.js';
 
-
 function closeAllertModal() {
   document.removeEventListener('keydown', onErrorSuccessModalKeydown);
 
@@ -20,7 +19,6 @@ function onErrorSuccessModalKeydown (evt) {
     closeAllertModal();
   }
 }
-
 
 function getWindow(sentDataStatus) {
   const allertTemplate = document.querySelector(sentDataStatus).content.cloneNode(true);
@@ -49,8 +47,6 @@ function showErrorSuccessModal (status) {
 
   document.removeEventListener('keydown', onDocumentKeydown);
   document.addEventListener('keydown', onErrorSuccessModalKeydown);
-
-  // allertbtn.addEventListener('click',closeAllertModal);
 }
 
 export { showErrorSuccessModal };

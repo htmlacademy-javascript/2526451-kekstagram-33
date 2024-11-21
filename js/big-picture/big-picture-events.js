@@ -39,7 +39,6 @@ function openBigPictureWindow () {
   commentsLoader.addEventListener ('click', showNextComments);
 }
 
-
 function closeBigPictureWindow () {
   compensateOverflowPadding(false);
   bigPictureWindow.classList.add('hidden');
@@ -88,8 +87,6 @@ function onPictureClick (evt) {
 }
 
 bigPictureWindowCloseBtn.addEventListener('click', closeBigPictureWindow);
-
 pictures.addEventListener('click', onPictureClick);
-// pictures.addEventListener('click', hideCommentsOnLoadBigPicture);
 
 export {getCommentsList, commentsLoader, commentShownCount,removeListner,addListner};
