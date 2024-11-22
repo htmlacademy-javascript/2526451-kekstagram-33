@@ -9,13 +9,12 @@ const photoDataPromise = fetch(`${SERVER_URL}/data`,
   {
     method:'GET'
   }
-)
-  .then((response) => {
-    if (!response.ok) {
-      throw new Error(`Ошибка сети: ${response.status}`);
-    }
-    return response.json();
-  });
+).then((response) => {
+  if (!response.ok) {
+    throw new Error(`Ошибка сети: ${response.status}`);
+  }
+  return response.json();
+});
 
 let photoDataArray;
 
@@ -27,7 +26,6 @@ photoDataPromise
     photoDataArray = photoData;
   })
   .catch(showErrorModal);
-
 
 function sendData (onSuccess, onFail, body){
   fetch(SERVER_URL,
@@ -47,7 +45,6 @@ function sendData (onSuccess, onFail, body){
 
 }
 
-
 function showErrorModal() {
   const errorModal = errorTemplate.cloneNode(true);
   const errorModalSection = errorModal.children[0];
@@ -58,4 +55,3 @@ function showErrorModal() {
   }, TIMEOUT_DELETE_ERROR_SECTION);
 }
 export {photoDataPromise,sendData, photoDataArray};
-

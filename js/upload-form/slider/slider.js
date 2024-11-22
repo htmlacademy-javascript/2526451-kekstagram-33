@@ -10,6 +10,7 @@ const effectsContainer = uploadForm.querySelector('.img-upload__effects');
 const uploadPreview = uploadForm.querySelector('.img-upload__preview');
 
 const [previewImage] = uploadPreview.children;
+
 const DEFAULT_STEP = 0.1;
 
 function createSlider() {
@@ -35,12 +36,10 @@ function createSlider() {
   });
 }
 
-
 function sliderToValue (target){
   sliderValue.value = slider.noUiSlider.get();
   previewImage.style.filter = EFFECTS[target].effect(sliderValue.value);
 }
-
 
 effectsContainer.addEventListener('change', (evt) => {
   const effectTarget = evt.target.value;
@@ -56,7 +55,6 @@ effectsContainer.addEventListener('change', (evt) => {
   }
   previewImage.style.filter = EFFECTS[effectTarget].effect(EFFECTS[effectTarget].range.max);
 
-
   function sliderUpdate() {
     sliderToValue(effectTarget);
   }
@@ -66,20 +64,11 @@ effectsContainer.addEventListener('change', (evt) => {
     start: EFFECTS[effectTarget].range.max,
     step: (effectTarget !== 'marvin') ? DEFAULT_STEP : EFFECTS[effectTarget].step,
   });
-
   slider.noUiSlider.on('update', sliderUpdate);
 });
 
-function destroySlider() {
-  // if (slider.noUiSlider) {
-  // console.log(slider.noUiSlider);
-  slider.noUiSlider.destroy();
-  // }
-}
-
-
 function defaultSliderValue (){
-  destroySlider();
+  slider.noUiSlider.destroy();
   previewImage.style.removeProperty('filter');
   uploadForm.querySelector('#effect-none').checked = true;
 }

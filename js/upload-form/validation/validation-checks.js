@@ -34,13 +34,13 @@ function validateHashtagsInput(value) {
     const noDuplicateHashtags = hasDuplicateHashtags(hashtagsArray);
     const maxHashtagsValid = hashtagsArray.length <= MAX_HASHTAGS;
 
-    const hashtagsValidationArray = [
+    const hashtagsValidationErrorsObj = [
       { isValid: allHashtagsRegularValid, message: 'введён невалидный хэштег' },
       { isValid: noDuplicateHashtags, message: 'хэштеги повторяются' },
       { isValid: maxHashtagsValid, message: 'превышено количество хэштегов' }
     ];
 
-    hashtagsValidationArray.forEach(({isValid, message})=>{
+    hashtagsValidationErrorsObj.forEach(({isValid, message})=>{
       if (!isValid) {
         errorMesage.push(message);
       }
@@ -49,6 +49,5 @@ function validateHashtagsInput(value) {
   }
   return true;
 }
-
 
 export {validateHashtagsInput, getErrorsMessages,cleanErrorsMessages};
