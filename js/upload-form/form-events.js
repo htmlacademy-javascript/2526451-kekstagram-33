@@ -2,23 +2,28 @@ import {isEscapeKey, compensateOverflowPadding} from '../util.js';
 import {addListner,removeListner} from '../big-picture/big-picture-events.js';
 
 import { createSlider,defaultSliderValue } from './slider/slider.js';
-import {defaultFormValues, blockEscKeyDownEvent} from'./form.js';
 import {defaultImgScaleValues} from'./scale-handler.js';
 
-import {setUserFormSubmit} from'./form.js';
+import {setUserFormSubmit, uploadForm,defaultFormValues} from'./form.js';
 
 const uploadOverlay = document.querySelector('.img-upload__overlay');
 const overlayCloseButton = uploadOverlay.querySelector('.img-upload__cancel');
+const inpustArea = uploadForm.querySelector('.img-upload__text');
+
 
 const onDocumentKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
-    if (blockEscKeyDownEvent()) {
-      return;
-    }
     closeModalWindow();
   }
 };
+
+function stopFormEscKeyDownEvent (evt) {
+  if (isEscapeKey(evt)) {
+    evt.target.blur();
+    evt.stopPropagation();
+  }
+}
 
 function openModalWindow () {
   compensateOverflowPadding(true);
@@ -28,6 +33,7 @@ function openModalWindow () {
 
   removeListner();
   document.addEventListener('keydown', onDocumentKeydown);
+  inpustArea.addEventListener('keydown', stopFormEscKeyDownEvent);
   createSlider();
 }
 
@@ -38,6 +44,8 @@ function closeModalWindow () {
   document.body.classList.remove('modal-open');
 
   document.removeEventListener('keydown', onDocumentKeydown);
+  inpustArea.removeEventListener('keydown', stopFormEscKeyDownEvent);
+
   addListner();
   defaultImgScaleValues();
   defaultFormValues();

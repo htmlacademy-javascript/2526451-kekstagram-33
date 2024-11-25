@@ -1,5 +1,5 @@
 import { isEscapeKey,compensateOverflowPadding } from '../util.js';
-import {pictures} from '../generate-pictures.js';
+import {picturesSection} from '../generate-pictures.js';
 
 import {generateComments } from './generate-comments-template.js';
 import { hideCommentsOnLoadBigPicture,showNextComments , getCommentShownCount, INITIAL_COMMENTS_TO_SHOW} from './comments-functions.js';
@@ -15,18 +15,22 @@ const commentsTotalCount = bigPictureWindow.querySelector('.social__comment-tota
 
 const pictureDescription = bigPictureWindow.querySelector('.social__caption');
 
-const commentInput = bigPictureWindow.querySelector('.social__footer-text');
 const commentsLoader = bigPictureWindow.querySelector('.comments-loader');
+const commentInput = bigPictureWindow.querySelector('.social__footer-text');
 
 const onDocumentKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
-    if (document.activeElement === commentInput) {
-      return;
-    }
     closeBigPictureWindow();
   }
 };
+function blockBigPictureEscEvent (evt){
+  if (isEscapeKey(evt)) {
+    evt.target.blur();
+    evt.stopPropagation();
+  }
+}
+
 
 function getCommentsList () {
   return bigPictureWindow.querySelectorAll('.social__comment');
@@ -39,6 +43,7 @@ function openBigPictureWindow () {
   document.body.classList.add('modal-open');
 
   document.addEventListener('keydown', onDocumentKeydown);
+  commentInput.addEventListener('keydown',blockBigPictureEscEvent);
   commentsLoader.addEventListener ('click', showNextComments);
 }
 
@@ -50,9 +55,9 @@ function closeBigPictureWindow () {
 
   document.removeEventListener('keydown', onDocumentKeydown);
   commentsLoader.removeEventListener ('click', showNextComments);
+  commentInput.removeEventListener('keydown',blockBigPictureEscEvent);
 
   commentInput.value = '';
-
 }
 
 function hideCommentsLoader (commentsList) {
@@ -64,16 +69,17 @@ function hideCommentsLoader (commentsList) {
 }
 
 function removeListner () {
-  pictures.removeEventListener('click', onPictureClick);
+  picturesSection.removeEventListener('click', onPictureClick);
 }
 
 function addListner () {
-  pictures.addEventListener('click', onPictureClick);
+  picturesSection.addEventListener('click', onPictureClick);
 }
 
 function onPictureClick (evt) {
   if (evt.target.nodeName === 'IMG') {
     const target = evt.target.parentElement;
+
     const [targetImage, { children: [newComentsCount, newLikesCount] }] = target.children;
 
     generateComments(targetImage.src);
@@ -97,6 +103,6 @@ function onPictureClick (evt) {
 }
 
 bigPictureWindowCloseBtn.addEventListener('click', closeBigPictureWindow);
-pictures.addEventListener('click', onPictureClick);
+picturesSection.addEventListener('click', onPictureClick);
 
 export {getCommentsList, commentsLoader, commentShownCount, removeListner, addListner};
