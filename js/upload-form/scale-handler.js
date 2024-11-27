@@ -1,10 +1,9 @@
 import { uploadForm } from './form.js';
 import { previewImage } from './slider/slider.js';
 
-const scaleContainer = uploadForm.querySelector('.img-upload__scale');
-const [zoomOutBtn, scaleValueInput, zoomInBtn] = scaleContainer.children;
-
 const SCALE_DIVISOR = 100;
+
+const DEFAULT_SCALE_TRANSFORM_VALUE = 1;
 
 const SCALE_RULES = {
   step: 0.25,
@@ -12,10 +11,25 @@ const SCALE_RULES = {
   minPictureSize: 0.25
 };
 
-const scaleValue = Number((scaleValueInput.value).replace('%',''));
-let formattedScaleValue = (scaleValue / SCALE_DIVISOR);
+const scaleContainer = uploadForm.querySelector('.img-upload__scale');
+const [zoomOutBtn, scaleValueInput, zoomInBtn] = scaleContainer.children;
 
-scaleContainer.addEventListener('click', (evt) =>{
+scaleValueInput.value = `${DEFAULT_SCALE_TRANSFORM_VALUE * SCALE_DIVISOR}%`;
+
+let formattedScaleValue = DEFAULT_SCALE_TRANSFORM_VALUE;
+
+const updateScale = () => {
+  previewImage.style.transform = `scale(${formattedScaleValue})`;
+  scaleValueInput.value = `${(formattedScaleValue * SCALE_DIVISOR)}%`;
+  scaleValueInput.setAttribute('value', scaleValueInput.value);
+};
+
+const setDefaultScaleValue = () => {
+  formattedScaleValue = DEFAULT_SCALE_TRANSFORM_VALUE;
+  updateScale();
+};
+
+scaleContainer.addEventListener('click', (evt) => {
   if (evt.target === scaleValueInput){
     return;
   }
@@ -28,17 +42,8 @@ scaleContainer.addEventListener('click', (evt) =>{
   if (evt.target === zoomOutBtn && formattedScaleValue > SCALE_RULES.minPictureSize) {
     formattedScaleValue -= STEP;
   }
-
-  previewImage.style.transform = `scale(${formattedScaleValue})`;
-
-  scaleValueInput.value = `${(formattedScaleValue * SCALE_DIVISOR)}%`;
-
-  scaleValueInput.setAttribute('value', scaleValueInput.value); //cypress иначе ругается
+  updateScale();
 });
 
-function defaultImgScaleValues() {
-  previewImage.style.transform = `scale(${1})`;
-  scaleValueInput.value = `${(100)}%`;
-}
 
-export {defaultImgScaleValues};
+export { setDefaultScaleValue };

@@ -1,9 +1,13 @@
 import { generatePictures} from'./generate-pictures.js';
+
+const TIMEOUT_DELETE_ERROR_SECTION = 5000;
+
+const SERVER_URL = 'https://32.javascript.htmlacademy.pro/kekstagram/';
+
+
 const sortMenu = document.querySelector('.img-filters');
 
 const errorTemplate = document.querySelector('#data-error').content;
-const TIMEOUT_DELETE_ERROR_SECTION = 5000;
-const SERVER_URL = 'https://32.javascript.htmlacademy.pro/kekstagram/';
 
 const photoDataPromise = fetch(`${SERVER_URL}data`,
   {
@@ -16,6 +20,17 @@ const photoDataPromise = fetch(`${SERVER_URL}data`,
   return response.json();
 });
 
+
+const showErrorModal = () => {
+  const errorModal = errorTemplate.cloneNode(true);
+  const errorModalSection = errorModal.children[0];
+
+  document.body.appendChild(errorModalSection);
+  setTimeout(() => {
+    document.body.lastChild.remove();
+  }, TIMEOUT_DELETE_ERROR_SECTION);
+};
+
 let photoDataArray;
 
 photoDataPromise
@@ -27,8 +42,8 @@ photoDataPromise
   })
   .catch(showErrorModal);
 
-function sendData (onSuccess, onFail, body){
-  fetch('https://32.javascript.htmlacademy.pro/kekstagram',
+const sendData = (onSuccess, onFail, body) => {
+  fetch(SERVER_URL,
     {
       method:'POST',
       body,
@@ -43,15 +58,6 @@ function sendData (onSuccess, onFail, body){
     onFail('ошибка');
   });
 
-}
+};
 
-function showErrorModal() {
-  const errorModal = errorTemplate.cloneNode(true);
-  const errorModalSection = errorModal.children[0];
-
-  document.body.appendChild(errorModalSection);
-  setTimeout(() => {
-    document.body.lastChild.remove();
-  }, TIMEOUT_DELETE_ERROR_SECTION);
-}
 export {photoDataPromise,sendData, photoDataArray};
